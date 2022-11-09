@@ -11,9 +11,9 @@ public class SystemDbContext
     public SystemDbContext(IOptions<MongoClientSettings> mongoClientSettings)
     {
         var mongoClient = new MongoClient(mongoClientSettings.Value);
-        _mongoDatabase = mongoClient.GetDatabase("System");
+        _mongoDatabase = mongoClient.GetDatabase("scriptureforge");
         Users = _mongoDatabase.GetCollection<User>("Users");
-        Projects = _mongoDatabase.GetCollection<Project>("Projects");
+        Projects = _mongoDatabase.GetCollection<Project>("projects");
     }
 
     public IMongoCollection<User> Users { get; }

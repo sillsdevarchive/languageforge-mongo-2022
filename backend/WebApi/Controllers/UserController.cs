@@ -1,4 +1,4 @@
-using LanguageForge.Api.Entities;
+﻿using LanguageForge.Api.Entities;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 
@@ -8,12 +8,12 @@ namespace LanguageForge.Api.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-   private readonly SystemDbContext _systemDbContext;
+    private readonly SystemDbContext _systemDbContext;
 
-   public UserController(SystemDbContext systemDbContext)
-   {
-       _systemDbContext = systemDbContext;
-   }
+    public UserController(SystemDbContext systemDbContext)
+    {
+        _systemDbContext = systemDbContext;
+    }
 
     // GET: api/User
     [HttpGet]
