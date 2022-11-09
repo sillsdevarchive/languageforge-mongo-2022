@@ -1,0 +1,12 @@
+﻿version: "3.9"
+services:
+  web-api:
+    build: 
+      dockerfile: WebApi/Dockerfile
+      context: .
+    container_name: AspDotNetApi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5170:80"
