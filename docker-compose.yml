@@ -3,7 +3,7 @@ services:
   web-api:
     build: 
       dockerfile: WebApi/Dockerfile
-      context: .
+      context: backend
     container_name: AspDotNetApi
     environment:
       - ASPNETCORE_ENVIRONMENT=Development

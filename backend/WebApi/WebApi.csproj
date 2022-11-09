@@ -21,4 +21,10 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="..\..\docker-compose.yml">
+      <Link>docker-compose.yml</Link>
+    </Content>
+  </ItemGroup>
+
 </Project>
