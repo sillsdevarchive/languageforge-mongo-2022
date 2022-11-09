@@ -8,5 +8,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
+      - Mongo__ConnectionString=mongodb://db:27017
     ports:
       - "5170:80"

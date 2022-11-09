@@ -16,10 +16,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<SystemDbContext>();
 builder.Services.AddSingleton<ProjectService>();
 BsonConfiguration.Setup();
-builder.Services.AddOptions<MongoClientSettings>("Mongo").Configure(settings =>
-{
-    settings.LinqProvider = LinqProvider.V3;
-});
+var mongoSettings = MongoClientSettings.FromConnectionString(builder.Configuration.GetValue<string>("Mongo:ConnectionString"));
+mongoSettings.LinqProvider = LinqProvider.V3;
+mongoSettings.ConnectTimeout = TimeSpan.FromSeconds(1);
+mongoSettings.SocketTimeout = TimeSpan.FromSeconds(1);
+mongoSettings.HeartbeatTimeout = TimeSpan.FromSeconds(1);
+builder.Services.AddSingleton(mongoSettings);
 
 var app = builder.Build();
 

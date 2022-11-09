@@ -8,9 +8,9 @@ public class SystemDbContext
 {
     private readonly IMongoDatabase _mongoDatabase;
 
-    public SystemDbContext(IOptions<MongoClientSettings> mongoClientSettings)
+    public SystemDbContext(MongoClientSettings mongoClientSettings)
     {
-        var mongoClient = new MongoClient(mongoClientSettings.Value);
+        var mongoClient = new MongoClient(mongoClientSettings);
         _mongoDatabase = mongoClient.GetDatabase("scriptureforge");
         Users = _mongoDatabase.GetCollection<User>("Users");
         Projects = _mongoDatabase.GetCollection<Project>("projects");
