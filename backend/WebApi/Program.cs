@@ -1,4 +1,6 @@
 ﻿using LanguageForge.Api;
+using LanguageForge.Api.Configuration;
+using LanguageForge.Api.Services;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
@@ -12,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<SystemDbContext>();
+builder.Services.AddSingleton<ProjectService>();
+BsonConfiguration.Setup();
 builder.Services.AddOptions<MongoClientSettings>("Mongo").Configure(settings =>
 {
     settings.LinqProvider = LinqProvider.V3;
