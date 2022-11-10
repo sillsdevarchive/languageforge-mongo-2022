@@ -1,14 +1,16 @@
-﻿using LanguageForge.Api;
-using LanguageForge.Api.Configuration;
+﻿using System.Text.Json.Serialization;
+using LanguageForge.Api;
 using LanguageForge.WebApi;
-using MongoDB.Driver;
-using MongoDB.Driver.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(opts =>
+{
+    var enumConverter = new JsonStringEnumConverter();
+    opts.JsonSerializerOptions.Converters.Add(enumConverter);
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
