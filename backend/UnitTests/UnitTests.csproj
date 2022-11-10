@@ -28,4 +28,14 @@
       <ProjectReference Include="..\WebApi\WebApi.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TestDatabase" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="TestDatabase\*.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

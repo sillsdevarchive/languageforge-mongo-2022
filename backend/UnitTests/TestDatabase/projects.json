@@ -1,0 +1,1812 @@
+{
+  "_id": {
+    "$oid": "6369cfe5c933ef623a020552"
+  },
+  "allowInviteAFriend": true,
+  "allowSharing": false,
+  "appName": "lexicon",
+  "config": {
+    "tasks": {
+      "view": {
+        "visible": true
+      },
+      "dashboard": {
+        "visible": true
+      },
+      "gatherTexts": {
+        "visible": true
+      },
+      "semdom": {
+        "language": "en",
+        "visibleFields": {
+          "definition": true,
+          "partOfSpeech": true,
+          "example": true,
+          "translation": true
+        },
+        "visible": true
+      },
+      "wordlist": {
+        "visible": true
+      },
+      "dbe": {
+        "visible": true
+      },
+      "addMeanings": {
+        "visible": true
+      },
+      "addGrammar": {
+        "visible": true
+      },
+      "addExamples": {
+        "visible": true
+      },
+      "review": {
+        "visible": true
+      },
+      "importExport": {
+        "visible": true
+      },
+      "configuration": {
+        "visible": true
+      }
+    },
+    "entry": {
+      "fieldOrder": [
+        "lexeme",
+        "citationForm",
+        "pronunciation",
+        "cvPattern",
+        "tone",
+        "location",
+        "etymology",
+        "etymologyGloss",
+        "etymologyComment",
+        "etymologySource",
+        "note",
+        "literalMeaning",
+        "entryBibliography",
+        "entryRestrictions",
+        "summaryDefinition",
+        "entryImportResidue",
+        "senses",
+        "customField_entry_Cust_Single_Line_All",
+        "customField_entry_Cust_MultiPara",
+        "customField_entry_Cust_Single_Line",
+        "customField_entry_Cust_Single_ListRef"
+      ],
+      "fields": {
+        "lexeme": {
+          "width": 20,
+          "inputSystems": [
+            "qaa-fonipa-x-kal",
+            "qaa-x-kal",
+            "qaa-Zxxx-x-kal-audio"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Word",
+          "hideIfEmpty": false
+        },
+        "senses": {
+          "fieldOrder": [
+            "gloss",
+            "definition",
+            "pictures",
+            "partOfSpeech",
+            "semanticDomain",
+            "scientificName",
+            "anthropologyNote",
+            "senseBibliography",
+            "discourseNote",
+            "encyclopedicNote",
+            "generalNote",
+            "grammarNote",
+            "phonologyNote",
+            "senseRestrictions",
+            "semanticsNote",
+            "sociolinguisticsNote",
+            "source",
+            "usages",
+            "senseType",
+            "academicDomains",
+            "anthropologyCategories",
+            "senseImportResidue",
+            "status",
+            "examples",
+            "customField_senses_Cust_Multi_ListRef"
+          ],
+          "fields": {
+            "definition": {
+              "width": 20,
+              "inputSystems": [
+                "en",
+                "fr"
+              ],
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Definition",
+              "hideIfEmpty": false
+            },
+            "partOfSpeech": {
+              "listCode": "grammatical-info",
+              "type": "optionlist",
+              "label": "Part of Speech"
+            },
+            "semanticDomain": {
+              "listCode": "semantic-domain-ddp4",
+              "type": "multioptionlist",
+              "label": "Semantic Domain"
+            },
+            "examples": {
+              "fieldOrder": [
+                "sentence",
+                "translation",
+                "reference",
+                "customField_examples_Cust_Example"
+              ],
+              "fields": {
+                "sentence": {
+                  "width": 20,
+                  "inputSystems": [
+                    "qaa-x-kal"
+                  ],
+                  "displayMultiline": false,
+                  "type": "multitext",
+                  "label": "Sentence",
+                  "hideIfEmpty": false
+                },
+                "translation": {
+                  "width": 20,
+                  "inputSystems": [
+                    "en",
+                    "fr"
+                  ],
+                  "displayMultiline": false,
+                  "type": "multitext",
+                  "label": "Translation",
+                  "hideIfEmpty": false
+                },
+                "reference": {
+                  "width": 20,
+                  "displayMultiline": false,
+                  "type": "multitext",
+                  "label": "Reference",
+                  "hideIfEmpty": true
+                },
+                "customField_examples_Cust_Example": {
+                  "width": 20,
+                  "inputSystems": [
+                    "qaa-x-kal",
+                    "qaa-fonipa-x-kal"
+                  ],
+                  "displayMultiline": false,
+                  "type": "multitext",
+                  "label": "Cust Example",
+                  "hideIfEmpty": false
+                }
+              },
+              "type": "fields",
+              "label": "Example",
+              "hideIfEmpty": false
+            },
+            "gloss": {
+              "width": 20,
+              "inputSystems": [
+                "en",
+                "es",
+                "fr",
+                "qaa-x-kal"
+              ],
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Gloss",
+              "hideIfEmpty": false
+            },
+            "pictures": {
+              "captionLabel": "Captions",
+              "captionHideIfEmpty": true,
+              "width": 20,
+              "displayMultiline": false,
+              "type": "pictures",
+              "label": "Pictures",
+              "hideIfEmpty": true
+            },
+            "scientificName": {
+              "width": 20,
+              "inputSystems": [
+                "en"
+              ],
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Scientific Name",
+              "hideIfEmpty": true
+            },
+            "anthropologyNote": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Anthropology Note",
+              "hideIfEmpty": true
+            },
+            "senseBibliography": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Bibliography",
+              "hideIfEmpty": true
+            },
+            "discourseNote": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Discourse Note",
+              "hideIfEmpty": true
+            },
+            "encyclopedicNote": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Encyclopedic Note",
+              "hideIfEmpty": true
+            },
+            "generalNote": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "General Note",
+              "hideIfEmpty": true
+            },
+            "grammarNote": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Grammar Note",
+              "hideIfEmpty": true
+            },
+            "phonologyNote": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Phonology Note",
+              "hideIfEmpty": true
+            },
+            "senseRestrictions": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Restrictions",
+              "hideIfEmpty": true
+            },
+            "semanticsNote": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Semantics Note",
+              "hideIfEmpty": true
+            },
+            "sociolinguisticsNote": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Sociolinguistics Note",
+              "hideIfEmpty": true
+            },
+            "source": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Source",
+              "hideIfEmpty": true
+            },
+            "usages": {
+              "listCode": "usage-type",
+              "type": "multioptionlist",
+              "label": "Usages",
+              "hideIfEmpty": true
+            },
+            "senseType": {
+              "listCode": "sense-type",
+              "type": "optionlist",
+              "label": "Type",
+              "hideIfEmpty": true
+            },
+            "academicDomains": {
+              "listCode": "domain-type",
+              "type": "multioptionlist",
+              "label": "Academic Domains",
+              "hideIfEmpty": true
+            },
+            "anthropologyCategories": {
+              "listCode": "anthro-code",
+              "type": "multioptionlist",
+              "label": "Anthropology Categories",
+              "hideIfEmpty": true
+            },
+            "senseImportResidue": {
+              "width": 20,
+              "displayMultiline": false,
+              "type": "multitext",
+              "label": "Import Residue",
+              "hideIfEmpty": true
+            },
+            "status": {
+              "listCode": "status",
+              "type": "optionlist",
+              "label": "Status",
+              "hideIfEmpty": true
+            },
+            "customField_senses_Cust_Multi_ListRef": {
+              "listCode": "Cust List",
+              "type": "multioptionlist",
+              "label": "Cust Multi ListRef",
+              "hideIfEmpty": false
+            }
+          },
+          "type": "fields",
+          "label": "Meaning",
+          "hideIfEmpty": false
+        },
+        "citationForm": {
+          "width": 20,
+          "inputSystems": [
+            "qaa-x-kal"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Citation Form",
+          "hideIfEmpty": true
+        },
+        "pronunciation": {
+          "width": 20,
+          "inputSystems": [
+            "qaa-x-kal"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Pronunciation",
+          "hideIfEmpty": true
+        },
+        "cvPattern": {
+          "width": 20,
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "CV Pattern",
+          "hideIfEmpty": true
+        },
+        "tone": {
+          "width": 20,
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Tone",
+          "hideIfEmpty": true
+        },
+        "location": {
+          "listCode": "location",
+          "type": "optionlist",
+          "label": "Location",
+          "hideIfEmpty": true
+        },
+        "etymology": {
+          "width": 20,
+          "inputSystems": [
+            "qaa-x-kal"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Etymology",
+          "hideIfEmpty": true
+        },
+        "etymologyGloss": {
+          "width": 20,
+          "inputSystems": [
+            "en"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Etymology Gloss",
+          "hideIfEmpty": true
+        },
+        "etymologyComment": {
+          "width": 20,
+          "inputSystems": [
+            "en",
+            "fr"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Etymology Comment",
+          "hideIfEmpty": true
+        },
+        "etymologySource": {
+          "width": 20,
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Etymology Source",
+          "hideIfEmpty": true
+        },
+        "note": {
+          "width": 20,
+          "inputSystems": [
+            "en",
+            "fr",
+            "my"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Note",
+          "hideIfEmpty": true
+        },
+        "literalMeaning": {
+          "width": 20,
+          "inputSystems": [
+            "en"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Literal Meaning",
+          "hideIfEmpty": true
+        },
+        "entryBibliography": {
+          "width": 20,
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Bibliography",
+          "hideIfEmpty": true
+        },
+        "entryRestrictions": {
+          "width": 20,
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Restrictions",
+          "hideIfEmpty": true
+        },
+        "summaryDefinition": {
+          "width": 20,
+          "inputSystems": [
+            "en",
+            "fr"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Summary Definition",
+          "hideIfEmpty": true
+        },
+        "entryImportResidue": {
+          "width": 20,
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Import Residue",
+          "hideIfEmpty": true
+        },
+        "customField_entry_Cust_Single_Line_All": {
+          "width": 20,
+          "inputSystems": [
+            "en",
+            "fr"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Cust Single Line All",
+          "hideIfEmpty": false
+        },
+        "customField_entry_Cust_MultiPara": {
+          "type": "multiparagraph",
+          "label": "Cust MultiPara",
+          "hideIfEmpty": false
+        },
+        "customField_entry_Cust_Single_Line": {
+          "width": 20,
+          "inputSystems": [
+            "en"
+          ],
+          "displayMultiline": false,
+          "type": "multitext",
+          "label": "Cust Single Line",
+          "hideIfEmpty": false
+        },
+        "customField_entry_Cust_Single_ListRef": {
+          "listCode": "domain-type",
+          "type": "optionlist",
+          "label": "Cust Single ListRef",
+          "hideIfEmpty": false
+        }
+      },
+      "type": "fields",
+      "hideIfEmpty": false
+    },
+    "roleViews": {
+      "observer": {
+        "fields": {
+          "lexeme": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "definition": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "partOfSpeech": {
+            "show": true,
+            "type": "basic"
+          },
+          "semanticDomain": {
+            "show": true,
+            "type": "basic"
+          },
+          "sentence": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "translation": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "gloss": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "pictures": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "citationForm": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "pronunciation": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "cvPattern": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "tone": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "location": {
+            "show": true,
+            "type": "basic"
+          },
+          "etymology": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologyGloss": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologyComment": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologySource": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "note": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "literalMeaning": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryBibliography": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryRestrictions": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "summaryDefinition": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryImportResidue": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "scientificName": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "anthropologyNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "senseBibliography": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "discourseNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "encyclopedicNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "generalNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "grammarNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "phonologyNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "senseRestrictions": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "semanticsNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "sociolinguisticsNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "source": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "usages": {
+            "show": true,
+            "type": "basic"
+          },
+          "senseType": {
+            "show": true,
+            "type": "basic"
+          },
+          "academicDomains": {
+            "show": true,
+            "type": "basic"
+          },
+          "anthropologyCategories": {
+            "show": true,
+            "type": "basic"
+          },
+          "senseImportResidue": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "status": {
+            "show": true,
+            "type": "basic"
+          },
+          "reference": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_entry_Cust_Single_Line_All": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_entry_Cust_MultiPara": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_entry_Cust_Single_Line": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_entry_Cust_Single_ListRef": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_examples_Cust_Example": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_senses_Cust_Multi_ListRef": {
+            "show": true,
+            "type": "basic"
+          }
+        },
+        "showTasks": {
+          "view": true,
+          "dashboard": true,
+          "gatherTexts": false,
+          "semdom": false,
+          "wordlist": false,
+          "dbe": true,
+          "addMeanings": false,
+          "addGrammar": false,
+          "addExamples": false,
+          "review": false
+        }
+      },
+      "observer_with_comment": {
+        "fields": {
+          "lexeme": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "definition": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "partOfSpeech": {
+            "show": true,
+            "type": "basic"
+          },
+          "semanticDomain": {
+            "show": true,
+            "type": "basic"
+          },
+          "sentence": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "translation": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "gloss": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "pictures": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "citationForm": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "pronunciation": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "cvPattern": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "tone": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "location": {
+            "show": true,
+            "type": "basic"
+          },
+          "etymology": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologyGloss": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologyComment": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologySource": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "note": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "literalMeaning": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryBibliography": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryRestrictions": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "summaryDefinition": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryImportResidue": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "scientificName": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "anthropologyNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "senseBibliography": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "discourseNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "encyclopedicNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "generalNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "grammarNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "phonologyNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "senseRestrictions": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "semanticsNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "sociolinguisticsNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "source": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "usages": {
+            "show": true,
+            "type": "basic"
+          },
+          "senseType": {
+            "show": true,
+            "type": "basic"
+          },
+          "academicDomains": {
+            "show": true,
+            "type": "basic"
+          },
+          "anthropologyCategories": {
+            "show": true,
+            "type": "basic"
+          },
+          "senseImportResidue": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "status": {
+            "show": true,
+            "type": "basic"
+          },
+          "reference": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_entry_Cust_Single_Line_All": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_entry_Cust_MultiPara": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_entry_Cust_Single_Line": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_entry_Cust_Single_ListRef": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_examples_Cust_Example": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_senses_Cust_Multi_ListRef": {
+            "show": true,
+            "type": "basic"
+          }
+        },
+        "showTasks": {
+          "view": true,
+          "dashboard": true,
+          "gatherTexts": false,
+          "semdom": false,
+          "wordlist": false,
+          "dbe": true,
+          "addMeanings": false,
+          "addGrammar": false,
+          "addExamples": false,
+          "review": false
+        }
+      },
+      "contributor": {
+        "fields": {
+          "lexeme": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "definition": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "partOfSpeech": {
+            "show": true,
+            "type": "basic"
+          },
+          "semanticDomain": {
+            "show": true,
+            "type": "basic"
+          },
+          "sentence": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "translation": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "gloss": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "pictures": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "citationForm": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "pronunciation": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "cvPattern": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "tone": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "location": {
+            "show": true,
+            "type": "basic"
+          },
+          "etymology": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologyGloss": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologyComment": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologySource": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "note": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "literalMeaning": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryBibliography": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryRestrictions": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "summaryDefinition": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryImportResidue": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "scientificName": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "anthropologyNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "senseBibliography": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "discourseNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "encyclopedicNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "generalNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "grammarNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "phonologyNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "senseRestrictions": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "semanticsNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "sociolinguisticsNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "source": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "usages": {
+            "show": true,
+            "type": "basic"
+          },
+          "senseType": {
+            "show": true,
+            "type": "basic"
+          },
+          "academicDomains": {
+            "show": true,
+            "type": "basic"
+          },
+          "anthropologyCategories": {
+            "show": true,
+            "type": "basic"
+          },
+          "senseImportResidue": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "status": {
+            "show": true,
+            "type": "basic"
+          },
+          "reference": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_entry_Cust_Single_Line_All": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_entry_Cust_MultiPara": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_entry_Cust_Single_Line": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_entry_Cust_Single_ListRef": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_examples_Cust_Example": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_senses_Cust_Multi_ListRef": {
+            "show": true,
+            "type": "basic"
+          }
+        },
+        "showTasks": {
+          "view": true,
+          "dashboard": true,
+          "gatherTexts": false,
+          "semdom": false,
+          "wordlist": false,
+          "dbe": true,
+          "addMeanings": true,
+          "addGrammar": true,
+          "addExamples": true,
+          "review": false
+        }
+      },
+      "project_manager": {
+        "fields": {
+          "lexeme": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "definition": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "partOfSpeech": {
+            "show": true,
+            "type": "basic"
+          },
+          "semanticDomain": {
+            "show": true,
+            "type": "basic"
+          },
+          "sentence": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "translation": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "gloss": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "pictures": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "citationForm": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "pronunciation": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "cvPattern": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "tone": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "location": {
+            "show": true,
+            "type": "basic"
+          },
+          "etymology": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologyGloss": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologyComment": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologySource": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "note": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "literalMeaning": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryBibliography": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryRestrictions": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "summaryDefinition": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryImportResidue": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "scientificName": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "anthropologyNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "senseBibliography": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "discourseNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "encyclopedicNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "generalNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "grammarNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "phonologyNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "senseRestrictions": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "semanticsNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "sociolinguisticsNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "source": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "usages": {
+            "show": true,
+            "type": "basic"
+          },
+          "senseType": {
+            "show": true,
+            "type": "basic"
+          },
+          "academicDomains": {
+            "show": true,
+            "type": "basic"
+          },
+          "anthropologyCategories": {
+            "show": true,
+            "type": "basic"
+          },
+          "senseImportResidue": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "status": {
+            "show": true,
+            "type": "basic"
+          },
+          "reference": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_entry_Cust_Single_Line_All": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_entry_Cust_MultiPara": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_entry_Cust_Single_Line": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_entry_Cust_Single_ListRef": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_examples_Cust_Example": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_senses_Cust_Multi_ListRef": {
+            "show": true,
+            "type": "basic"
+          }
+        },
+        "showTasks": {
+          "view": true,
+          "dashboard": true,
+          "gatherTexts": true,
+          "semdom": true,
+          "wordlist": true,
+          "dbe": true,
+          "addMeanings": true,
+          "addGrammar": true,
+          "addExamples": true,
+          "review": true
+        }
+      },
+      "tech_support": {
+        "fields": {
+          "lexeme": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "definition": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "partOfSpeech": {
+            "show": true,
+            "type": "basic"
+          },
+          "semanticDomain": {
+            "show": true,
+            "type": "basic"
+          },
+          "sentence": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "translation": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "gloss": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "pictures": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "citationForm": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "pronunciation": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "cvPattern": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "tone": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "location": {
+            "show": true,
+            "type": "basic"
+          },
+          "etymology": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologyGloss": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologyComment": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "etymologySource": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "note": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "literalMeaning": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryBibliography": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryRestrictions": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "summaryDefinition": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "entryImportResidue": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "scientificName": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "anthropologyNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "senseBibliography": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "discourseNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "encyclopedicNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "generalNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "grammarNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "phonologyNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "senseRestrictions": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "semanticsNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "sociolinguisticsNote": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "source": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "usages": {
+            "show": true,
+            "type": "basic"
+          },
+          "senseType": {
+            "show": true,
+            "type": "basic"
+          },
+          "academicDomains": {
+            "show": true,
+            "type": "basic"
+          },
+          "anthropologyCategories": {
+            "show": true,
+            "type": "basic"
+          },
+          "senseImportResidue": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "status": {
+            "show": true,
+            "type": "basic"
+          },
+          "reference": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_entry_Cust_Single_Line_All": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_entry_Cust_MultiPara": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_entry_Cust_Single_Line": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_entry_Cust_Single_ListRef": {
+            "show": true,
+            "type": "basic"
+          },
+          "customField_examples_Cust_Example": {
+            "overrideInputSystems": false,
+            "show": true,
+            "type": "multitext"
+          },
+          "customField_senses_Cust_Multi_ListRef": {
+            "show": true,
+            "type": "basic"
+          }
+        },
+        "showTasks": {
+          "view": true,
+          "dashboard": true,
+          "gatherTexts": true,
+          "semdom": true,
+          "wordlist": true,
+          "dbe": true,
+          "addMeanings": true,
+          "addGrammar": true,
+          "addExamples": true,
+          "review": true
+        }
+      }
+    }
+  },
+  "dateCreated": {
+    "$date": "2022-11-08T03:41:25.157Z"
+  },
+  "dateModified": {
+    "$date": "2022-11-08T03:41:49.331Z"
+  },
+  "inputSystems": {
+    "qaa-fonipa-x-kal": {
+      "abbreviation": "qaa-fonipa-x-kal",
+      "tag": "qaa-fonipa-x-kal",
+      "languageName": "Language Not Listed",
+      "isRightToLeft": false
+    },
+    "qaa-x-kal": {
+      "abbreviation": "qaa-x-kal",
+      "tag": "qaa-x-kal",
+      "languageName": "Language Not Listed",
+      "isRightToLeft": false
+    },
+    "en": {
+      "abbreviation": "en",
+      "tag": "en",
+      "languageName": "English",
+      "isRightToLeft": false
+    },
+    "es": {
+      "abbreviation": "es",
+      "tag": "es",
+      "languageName": "español",
+      "isRightToLeft": false
+    },
+    "qaa-Zxxx-x-kal-audio": {
+      "abbreviation": "qaa-Zxxx-x-kal-audio",
+      "tag": "qaa-Zxxx-x-kal-audio",
+      "languageName": "Language Not Listed",
+      "isRightToLeft": false
+    },
+    "fr": {
+      "abbreviation": "fr",
+      "tag": "fr",
+      "languageName": "français",
+      "isRightToLeft": false
+    },
+    "my": {
+      "abbreviation": "my",
+      "tag": "my",
+      "languageName": "Burmese",
+      "isRightToLeft": false
+    }
+  },
+  "interfaceLanguageCode": "en",
+  "isArchived": false,
+  "languageCode": "th",
+  "lastEntryModifiedDate": {
+    "$date": "1970-01-01T00:00:01.000Z"
+  },
+  "lastSyncedDate": {
+    "$date": "1970-01-01T00:00:00.000Z"
+  },
+  "liftFilePath": "/var/www/html/assets/lexicon/sf_test_import/TestLangProj.lift",
+  "ownerRef": {
+    "$oid": "6359f8855e3dc273d4662f2a"
+  },
+  "projectCode": "test_import",
+  "projectName": "Test import",
+  "siteName": "languageforge.org",
+  "users": {
+    "6359f8855e3dc273d4662f2a": {
+      "role": "project_manager"
+    }
+  }
+}

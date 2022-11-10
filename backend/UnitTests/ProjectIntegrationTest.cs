@@ -4,7 +4,7 @@ using UnitTests.Fixtures;
 
 namespace UnitTests;
 
-public class ProjectIntegrationTest: IClassFixture<IocFixture>
+public class ProjectIntegrationTest : IClassFixture<IocFixture>
 {
     private readonly ProjectService _projectService;
 

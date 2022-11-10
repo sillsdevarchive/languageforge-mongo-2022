@@ -8,7 +8,7 @@ namespace UnitTests.Fixtures;
 
 public class IocFixture : IDisposable
 {
-    private readonly IMongoRunner _mongoRunner;
+    public IMongoRunner MongoRunner { get; }
     public ServiceProvider ServiceProvider { get; }
 
     public IocFixture()
@@ -16,21 +16,33 @@ public class IocFixture : IDisposable
         var services = new ServiceCollection();
         DataServiceKernel.Setup(services);
         WebApiKernel.Setup(services);
-        _mongoRunner = GetMongoRunner();
-        var clientSettings = MongoClientSettings.FromConnectionString(_mongoRunner.ConnectionString);
+        MongoRunner = SetupMongoRunner();
+        var clientSettings = MongoClientSettings.FromConnectionString(MongoRunner.ConnectionString);
         services.RemoveAll(typeof(MongoClientSettings));
         services.AddSingleton(clientSettings);
         ServiceProvider = services.BuildServiceProvider(true);
     }
 
-    private IMongoRunner GetMongoRunner()
+    private IMongoRunner SetupMongoRunner()
     {
-        return MongoRunner.Run();
+        var runner = EphemeralMongo.MongoRunner.Run(new MongoRunnerOptions
+        {
+            StandardErrorLogger = text =>
+            {
+                //note does not work, used for breakpoints. TODO fix
+                Console.Write(text);
+            }
+        });
+        var testDataPath = Path.GetFullPath("TestDatabase");
+        runner.Import(SystemDbContext.SystemDbName, "projects", Path.Combine(testDataPath, "projects.json"));
+        runner.Import(SystemDbContext.SystemDbName, "users", Path.Combine(testDataPath, "users.json"));
+        runner.Import(SystemDbContext.SystemDbName, "userrelation", Path.Combine(testDataPath, "userrelation.json"));
+        return runner;
     }
 
     public void Dispose()
     {
-        _mongoRunner.Dispose();
+        MongoRunner.Dispose();
         ServiceProvider.Dispose();
     }
 }

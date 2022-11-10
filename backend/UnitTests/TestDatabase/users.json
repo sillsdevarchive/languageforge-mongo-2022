@@ -1,0 +1,33 @@
+{
+  "_id": {
+    "$oid": "6359f8855e3dc273d4662f2a"
+  },
+  "active": true,
+  "avatar_ref": "anonymoose.png",
+  "communicate_via": "email",
+  "dateCreated": {
+    "$date": "2022-10-27T03:18:51.864Z"
+  },
+  "dateModified": {
+    "$date": "2022-11-10T02:59:07.385Z"
+  },
+  "email": "admin@example.com",
+  "languageDepotUsername": "admin",
+  "lastUsedProjectId": "6369cfe5c933ef623a020552",
+  "last_login": 1666840731,
+  "name": "Admin",
+  "password": "$2y$07$NRGaBfMC2pS14TcMZQQlBObbpHJgStkdxrpXFuA5yLGnqGlgaHlTi",
+  "projects": [
+    {
+      "$oid": "6369cfe5c933ef623a020552"
+    }
+  ],
+  "resetPasswordExpirationDate": {
+    "$date": "2022-10-27T03:18:51.000Z"
+  },
+  "role": "system_admin",
+  "username": "admin",
+  "validationExpirationDate": {
+    "$date": "2022-10-27T03:18:51.000Z"
+  }
+}

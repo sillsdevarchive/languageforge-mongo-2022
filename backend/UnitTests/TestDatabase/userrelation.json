@@ -1,0 +1,32 @@
+{
+  "_id": {
+    "$oid": "6369cfe6c933ef623a020555"
+  },
+  "dateCreated": {
+    "$date": "2022-11-08T03:41:26.047Z"
+  },
+  "dateModified": {
+    "$date": "2022-11-10T03:00:00.987Z"
+  },
+  "projectRef": {
+    "$oid": "6369cfe5c933ef623a020552"
+  },
+  "type": "unread_item",
+  "unread": [
+    {
+      "itemRef": {
+        "$oid": "6369cfe5c933ef623a020554"
+      },
+      "type": "activity"
+    },
+    {
+      "itemRef": {
+        "$oid": "636c69303be52e2681012692"
+      },
+      "type": "activity"
+    }
+  ],
+  "userRef": {
+    "$oid": "6359f8855e3dc273d4662f2a"
+  }
+}
