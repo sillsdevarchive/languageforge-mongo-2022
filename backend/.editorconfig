@@ -18,7 +18,7 @@ indent_size = 2
 [*.{cs,csx}]
 indent_size = 4
 insert_final_newline = true
-charset = utf-8-bom
+charset = utf-8
 ###############################
 # .NET Coding Conventions     #
 ###############################
@@ -127,3 +127,6 @@ csharp_space_between_method_call_empty_parameter_list_parentheses = false
 # Wrapping preferences
 csharp_preserve_single_line_statements = true
 csharp_preserve_single_line_blocks = true
+
+# VSTHRD200: Use "Async" suffix for async methods
+dotnet_diagnostic.VSTHRD200.severity = none

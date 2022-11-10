@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using UnitTests.Fixtures;
 
-namespace UnitTests;
+namespace LanguageForge.UnitTests;
 
 public class ProjectIntegrationTest : IClassFixture<IocFixture>
 {
