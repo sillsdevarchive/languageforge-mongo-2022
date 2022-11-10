@@ -1,6 +1,7 @@
 ﻿using EphemeralMongo;
 using LanguageForge.Api;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MongoDB.Driver;
 
 namespace UnitTests.Fixtures;
@@ -17,6 +18,7 @@ public class IocFixture : IDisposable
         WebApiKernel.Setup(services);
         _mongoRunner = GetMongoRunner();
         var clientSettings = MongoClientSettings.FromConnectionString(_mongoRunner.ConnectionString);
+        services.RemoveAll(typeof(MongoClientSettings));
         services.AddSingleton(clientSettings);
         ServiceProvider = services.BuildServiceProvider(true);
     }

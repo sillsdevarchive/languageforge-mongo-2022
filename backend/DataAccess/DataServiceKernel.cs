@@ -1,5 +1,10 @@
 ﻿using LanguageForge.Api.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
+using MongoDB.Driver.Core.Configuration;
+using MongoDB.Driver.Linq;
 
 namespace LanguageForge.Api;
 
@@ -9,5 +14,14 @@ public static class DataServiceKernel
     {
         BsonConfiguration.Setup();
         services.AddSingleton<SystemDbContext>();
+        services.AddSingleton<MongoClientSettings>(provider =>
+        {
+            var configuration = provider.GetRequiredService<IConfiguration>();
+            var mongoSettings = MongoClientSettings.FromConnectionString(
+                    configuration.GetValue<string>("Mongo:ConnectionString"));
+            mongoSettings.LinqProvider = LinqProvider.V3;
+            mongoSettings.LoggingSettings = new LoggingSettings(provider.GetRequiredService<ILoggerFactory>());
+            return mongoSettings;
+        });
     }
 }
