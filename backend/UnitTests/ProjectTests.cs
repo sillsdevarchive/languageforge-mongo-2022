@@ -9,6 +9,7 @@ public class UnitTest1
     {
         var project = new Project
         {
+            Id = "6369cfe5c933ef623a020552",
             ProjectName = "test",
             ProjectCode = "test",
             AllowSharing = false,

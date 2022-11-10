@@ -30,20 +30,7 @@ public class UserService
             .SingleOrDefaultAsync();
     }
 
-    private UserDto toDto(User u)
-    {
-        return new UserDto
-        {
-            Id = u.Id,
-            Username = u.Username,
-            Name = u.Name,
-            Email = u.Email,
-            Role = u.Role,
-            Active = u.Active,
-        };
-    }
-
-    internal Task<UserDto> UpdateUser(UserDto user)
+    public Task<UserDto> UpdateUser(UserDto user)
     {
         var update = Builders<User>.Update
             .Set((u) => u.Name, user.Name)
@@ -58,9 +45,22 @@ public class UserService
         );
     }
 
-    internal async Task<bool> DeleteUser(string id)
+    public async Task<bool> DeleteUser(string id)
     {
         var result = await _systemDbContext.Users.DeleteOneAsync(u => u.Id == id);
         return result.DeletedCount > 0;
+    }
+
+    private UserDto toDto(User u)
+    {
+        return new UserDto
+        {
+            Id = u.Id,
+            Username = u.Username,
+            Name = u.Name,
+            Email = u.Email,
+            Role = u.Role,
+            Active = u.Active,
+        };
     }
 }
