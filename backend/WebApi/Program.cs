@@ -16,13 +16,18 @@ builder.Services.AddSwaggerGen();
 DataServiceKernel.Setup(builder.Services);
 WebApiKernel.Setup(builder.Services);
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI((settings) =>
+{
+    if (app.Environment.IsDevelopment())
+    {
+        settings.EnableTryItOutByDefault();
+    }
+});
 
 
 app.UseHttpsRedirection();

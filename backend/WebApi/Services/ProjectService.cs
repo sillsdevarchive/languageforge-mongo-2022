@@ -11,6 +11,7 @@ public class ProjectService
     {
         _systemDbContext = systemDbContext;
     }
+
     public async Task<List<ProjectDto>> ListProjects()
     {
         return await _systemDbContext.Projects
@@ -20,7 +21,7 @@ public class ProjectService
                 Id = p.Id,
                 ProjectCode = p.ProjectCode,
                 ProjectName = p.ProjectName,
-                InputSystems = p.InputSystems.Select(i => i.Value.Abbreviation).ToArray()
+                InputSystems = p.InputSystems.Select(i => i.Value.Abbreviation).ToArray(),
             })
             .ToListAsync();
     }

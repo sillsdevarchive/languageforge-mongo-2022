@@ -1,8 +1,6 @@
 ﻿using LanguageForge.Api.Dtos;
-using LanguageForge.Api.Entities;
 using LanguageForge.Api.Services;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
 
 namespace LanguageForge.Api.Controllers;
 
@@ -30,19 +28,19 @@ public class ProjectController : ControllerBase
     {
         return "value";
     }
-    
+
     // POST: api/Project
     [HttpPost]
     public void PostProject([FromBody] string value)
     {
     }
-    
+
     // PUT: api/Project/5
     [HttpPut("{id}")]
     public void PutProject(int id, [FromBody] string value)
     {
     }
-    
+
     // DELETE: api/Project/5
     [HttpDelete("{id}")]
     public void DeleteProject(int id)

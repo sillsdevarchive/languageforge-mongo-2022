@@ -7,5 +7,5 @@ public class EntityDocument : EntityBase
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; init; }
+    public required string Id { get; init; }
 }

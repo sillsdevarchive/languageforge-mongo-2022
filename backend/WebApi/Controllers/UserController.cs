@@ -1,6 +1,6 @@
-﻿using LanguageForge.Api.Entities;
+﻿using LanguageForge.Api.Dtos;
+using LanguageForge.Api.Services;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
 
 namespace LanguageForge.Api.Controllers;
 
@@ -8,43 +8,64 @@ namespace LanguageForge.Api.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly SystemDbContext _systemDbContext;
+    private readonly UserService _userService;
 
-    public UserController(SystemDbContext systemDbContext)
+    public UserController(UserService userService)
     {
-        _systemDbContext = systemDbContext;
+        _userService = userService;
     }
 
     // GET: api/User
     [HttpGet]
-    public async Task<List<User>> Get()
+    public async Task<List<UserDto>> Get()
     {
-        return await _systemDbContext.Users.Find(user => true).ToListAsync();
+        return await _userService.ListUsers();
     }
 
     // GET: api/User/5
     [HttpGet("{id}")]
-    public string Get(int id)
+    public async Task<ActionResult<UserDto>> Get(string id)
     {
-        return "value";
+        var user = await _userService.FindUser(id);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return user;
     }
 
     // POST: api/User
     [HttpPost]
-    public void Post([FromBody] string value)
+    public async void Post([FromBody] UserDto user)
     {
         // _systemDbContext.Users.
     }
 
     // PUT: api/User/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    public async Task<ActionResult<UserDto>> PutAsync(string id, [FromBody] UserDto user)
     {
+        if (id != user.Id)
+        {
+            throw new ArgumentException("User Id in URL and body do not match.");
+        }
+
+        var updatedUser = await _userService.UpdateUser(user);
+        if (updatedUser == null)
+        {
+            return NotFound();
+        }
+
+        return updatedUser;
     }
 
     // DELETE: api/User/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public async Task<StatusCodeResult> Delete(string id)
     {
+        var deleted = await _userService.DeleteUser(id);
+        return deleted ? Ok() : NotFound();
     }
 }

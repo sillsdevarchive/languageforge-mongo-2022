@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace LanguageForge.Api.Entities;
+﻿namespace LanguageForge.Api.Entities;
 
 public class Project : EntityDocument
 {
