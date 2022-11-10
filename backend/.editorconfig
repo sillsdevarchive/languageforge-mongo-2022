@@ -56,6 +56,7 @@ dotnet_style_prefer_conditional_expression_over_return = false:silent
 
 
 dotnet_diagnostic.IDE0058.severity = suggestion
+dotnet_diagnostic.CA2007.severity = none
 
 ###############################
 # Naming Conventions          #
