@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "backend\WebApi\We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "backend\DataAccess\DataAccess.csproj", "{E7EC4924-6DA7-4A1F-80AC-D46D93DA7DF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{F4DEEECD-B66F-4F9D-8E52-F91F9B8612E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "backend\UnitTests\UnitTests.csproj", "{F4DEEECD-B66F-4F9D-8E52-F91F9B8612E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -13,14 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<SystemDbContext>();
-builder.Services.AddSingleton<ProjectService>();
-BsonConfiguration.Setup();
+DataServiceKernel.Setup(builder.Services);
+WebApiKernel.Setup(builder.Services);
+
 var mongoSettings = MongoClientSettings.FromConnectionString(builder.Configuration.GetValue<string>("Mongo:ConnectionString"));
 mongoSettings.LinqProvider = LinqProvider.V3;
 mongoSettings.ConnectTimeout = TimeSpan.FromSeconds(1);
 mongoSettings.SocketTimeout = TimeSpan.FromSeconds(1);
-mongoSettings.HeartbeatTimeout = TimeSpan.FromSeconds(1);
+mongoSettings.HeartbeatTimeout = TimeSpan.FromSeconds(2);
 builder.Services.AddSingleton(mongoSettings);
 
 var app = builder.Build();
