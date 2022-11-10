@@ -1,6 +1,6 @@
 ﻿namespace LanguageForge.WebApi.Dtos;
 
-public class UserDto
+public record UserDto
 {
     public required string Id { get; init; }
     public required string Username { get; init; }

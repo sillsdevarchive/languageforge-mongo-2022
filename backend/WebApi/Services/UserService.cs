@@ -1,5 +1,7 @@
 ﻿using LanguageForge.Api;
+using LanguageForge.Api.Configuration;
 using LanguageForge.Api.Entities;
+using LanguageForge.Api.Extensions;
 using LanguageForge.WebApi.Dtos;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -10,16 +12,28 @@ public class UserService
 {
     private readonly SystemDbContext _systemDbContext;
 
+    private static readonly ProjectionDefinition<User, UserDto> UserToDtoProjection =
+        Builders<User>.Projection.Expression(user => new UserDto
+        {
+            Id = user.Id,
+            Username = user.Username,
+            Name = user.Name,
+            Email = user.Email,
+            Role = user.Role,
+            Active = user.Active,
+        });
+
     public UserService(SystemDbContext systemDbContext)
     {
         _systemDbContext = systemDbContext;
     }
 
+
     public async Task<List<UserDto>> ListUsers()
     {
         return await _systemDbContext.Users
             .Find(new BsonDocument())
-            .Project(u => toDto(u))
+            .Project(UserToDtoProjection)
             .ToListAsync();
     }
 
@@ -27,22 +41,19 @@ public class UserService
     {
         return await _systemDbContext.Users
             .Find(u => u.Id == userId)
-            .Project(u => toDto(u))
+            .Project(UserToDtoProjection)
             .SingleOrDefaultAsync();
     }
 
-    public Task<UserDto> UpdateUser(UserDto user)
+    public async Task<UserDto?> UpdateUser(UserDto user)
     {
         var update = Builders<User>.Update
             .Set((u) => u.Name, user.Name)
             .Set((u) => u.Email, user.Email);
-        return _systemDbContext.Users.FindOneAndUpdateAsync(
-            (u) => u.Id == user.Id,
+        return await _systemDbContext.Users.Update(
+            user.Id,
             update,
-            new FindOneAndUpdateOptions<User, UserDto>
-            {
-                ReturnDocument = ReturnDocument.After
-            }
+            UserToDtoProjection
         );
     }
 
@@ -50,18 +61,5 @@ public class UserService
     {
         var result = await _systemDbContext.Users.DeleteOneAsync(u => u.Id == id);
         return result.DeletedCount > 0;
-    }
-
-    private UserDto toDto(User u)
-    {
-        return new UserDto
-        {
-            Id = u.Id,
-            Username = u.Username,
-            Name = u.Name,
-            Email = u.Email,
-            Role = u.Role,
-            Active = u.Active,
-        };
     }
 }
