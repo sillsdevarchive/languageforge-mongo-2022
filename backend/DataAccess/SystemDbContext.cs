@@ -1,5 +1,4 @@
 ﻿using LanguageForge.Api.Entities;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace LanguageForge.Api;
@@ -13,7 +12,7 @@ public class SystemDbContext
     {
         var mongoClient = new MongoClient(mongoClientSettings);
         _mongoDatabase = mongoClient.GetDatabase(SystemDbName);
-        Users = _mongoDatabase.GetCollection<User>("Users");
+        Users = _mongoDatabase.GetCollection<User>("users");
         Projects = _mongoDatabase.GetCollection<Project>("projects");
     }
 
