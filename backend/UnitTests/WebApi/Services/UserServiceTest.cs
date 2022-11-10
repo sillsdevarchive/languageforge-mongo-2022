@@ -1,6 +1,6 @@
-using LanguageForge.Api.Services;
+using LanguageForge.UnitTests.Fixtures;
+using LanguageForge.WebApi.Services;
 using Microsoft.Extensions.DependencyInjection;
-using UnitTests.Fixtures;
 
 namespace LanguageForge.UnitTests.WebApi.Services;
 

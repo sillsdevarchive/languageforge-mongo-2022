@@ -1,6 +1,6 @@
-﻿using LanguageForge.Api.Services;
+﻿using LanguageForge.WebApi.Services;
 
-namespace LanguageForge.Api;
+namespace LanguageForge.WebApi;
 
 public static class WebApiKernel
 {

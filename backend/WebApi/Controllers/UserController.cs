@@ -1,8 +1,8 @@
-﻿using LanguageForge.Api.Dtos;
-using LanguageForge.Api.Services;
+﻿using LanguageForge.WebApi.Dtos;
+using LanguageForge.WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LanguageForge.Api.Controllers;
+namespace LanguageForge.WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

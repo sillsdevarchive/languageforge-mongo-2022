@@ -1,4 +1,4 @@
-﻿namespace LanguageForge.Api.Dtos;
+﻿namespace LanguageForge.WebApi.Dtos;
 
 public class ProjectDto
 {

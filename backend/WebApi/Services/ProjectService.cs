@@ -1,7 +1,8 @@
-﻿using LanguageForge.Api.Dtos;
+﻿using LanguageForge.Api;
+using LanguageForge.WebApi.Dtos;
 using MongoDB.Driver;
 
-namespace LanguageForge.Api.Services;
+namespace LanguageForge.WebApi.Services;
 
 public class ProjectService
 {
