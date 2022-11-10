@@ -23,8 +23,8 @@ public class ProjectController : ControllerBase
     }
 
     // GET: api/Project/5
-    [HttpGet("{id}")]
-    public string GetProject(int id)
+    [HttpGet("{projectCode}")]
+    public string GetProject(string projectCode)
     {
         return "value";
     }
@@ -36,14 +36,14 @@ public class ProjectController : ControllerBase
     }
 
     // PUT: api/Project/5
-    [HttpPut("{id}")]
-    public void PutProject(int id, [FromBody] string value)
+    [HttpPut("{projectCode}")]
+    public void PutProject(string projectCode, [FromBody] string value)
     {
     }
 
     // DELETE: api/Project/5
-    [HttpDelete("{id}")]
-    public void DeleteProject(int id)
+    [HttpDelete("{projectCode}")]
+    public void DeleteProject(string projectCode)
     {
     }
 }

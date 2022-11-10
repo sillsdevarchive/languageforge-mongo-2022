@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace LanguageForge.WebApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]/{projectId}")]
+[Route("api/[controller]/{projectCode}")]
 public class EntryController : ControllerBase
 {
-    // GET: api/Entry/{projectId}
+    // GET: api/Entry/{projectCode}
     [HttpGet]
-    public List<EntryDto> GetEntries(string projectId)
+    public List<EntryDto> GetEntries(string projectCode)
     {
         return new() {
             new() {
