@@ -1,0 +1,9 @@
+{
+    "omnisharp.organizeImportsOnFormat": true,
+    "omnisharp.enableRoslynAnalyzers": true,
+    "omnisharp.enableImportCompletion": true,
+    "omnisharp.enableEditorConfigSupport": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    }
+}
