@@ -1,4 +1,4 @@
-﻿namespace LanguageForge.Api.Entities;
+namespace LanguageForge.Api.Entities;
 
 public class InputSystem : EntityBase
 {

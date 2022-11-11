@@ -1,4 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Bson.Serialization.Conventions;
 
 namespace LanguageForge.Api.Configuration;
 

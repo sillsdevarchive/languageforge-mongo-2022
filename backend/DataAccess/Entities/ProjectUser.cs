@@ -1,4 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace LanguageForge.Api.Entities;
 
@@ -38,6 +38,8 @@ public class ProjectUser
             ProjectRole.Commenter => "observer_with_comment",
             ProjectRole.Manager => "project_manager",
             ProjectRole.TechSupport => "tech_support",
+            ProjectRole.Observer => throw new NotImplementedException(),
+            ProjectRole.Contributor => throw new NotImplementedException(),
             _ => role.ToString().ToLower()
         };
     }

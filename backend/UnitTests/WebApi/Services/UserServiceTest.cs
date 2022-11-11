@@ -1,4 +1,4 @@
-﻿using LanguageForge.Api.Entities;
+using LanguageForge.Api.Entities;
 using LanguageForge.UnitTests.Fixtures;
 using LanguageForge.WebApi.Dtos;
 using LanguageForge.WebApi.Services;

@@ -1,4 +1,4 @@
-﻿using LanguageForge.UnitTests.Fixtures;
+using LanguageForge.UnitTests.Fixtures;
 using LanguageForge.WebApi.Services;
 using Microsoft.Extensions.DependencyInjection;
 

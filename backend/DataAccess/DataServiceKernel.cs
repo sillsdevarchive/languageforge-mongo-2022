@@ -1,7 +1,6 @@
-﻿using LanguageForge.Api.Configuration;
+using LanguageForge.Api.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
@@ -14,7 +13,7 @@ public static class DataServiceKernel
     public static void Setup(IServiceCollection services)
     {
         BsonConfiguration.Setup();
-        services.AddSingleton<MongoClientSettings>(provider =>
+        services.AddSingleton(provider =>
         {
             var configuration = provider.GetRequiredService<IConfiguration>();
             var mongoSettings = MongoClientSettings.FromConnectionString(

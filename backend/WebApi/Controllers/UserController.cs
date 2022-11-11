@@ -1,4 +1,4 @@
-﻿using LanguageForge.WebApi.Dtos;
+using LanguageForge.WebApi.Dtos;
 using LanguageForge.WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,7 +38,7 @@ public class UserController : ControllerBase
 
     // POST: api/User
     [HttpPost]
-    public async void Post([FromBody] UserDto user)
+    public async Task Post([FromBody] UserDto user)
     {
         // _systemDbContext.Users.
     }

@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using MongoDB.Driver;
 
 namespace LanguageForge.Api.Extensions;
@@ -33,7 +33,8 @@ public static class MongoCollectionExtensions
             update,
             new FindOneAndUpdateOptions<TDocument, TProjection>
             {
-                Projection = projection, ReturnDocument = ReturnDocument.After
+                Projection = projection,
+                ReturnDocument = ReturnDocument.After
             }
         )!;
     }

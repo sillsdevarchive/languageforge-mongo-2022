@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using LanguageForge.Api;
 using LanguageForge.Api.Entities;
 using LanguageForge.WebApi.Dtos;

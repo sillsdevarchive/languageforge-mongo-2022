@@ -1,4 +1,4 @@
-﻿using LanguageForge.Api.Entities;
+using LanguageForge.Api.Entities;
 using LanguageForge.WebApi.Services;
 using MongoDB.Bson;
 

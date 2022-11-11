@@ -1,4 +1,4 @@
-﻿using EphemeralMongo;
+using EphemeralMongo;
 using LanguageForge.Api;
 using LanguageForge.WebApi;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,11 +28,7 @@ public class IocFixture : IDisposable
     {
         var runner = EphemeralMongo.MongoRunner.Run(new MongoRunnerOptions
         {
-            StandardErrorLogger = text =>
-            {
-                //note does not work, used for breakpoints. TODO fix
-                Console.Write(text);
-            }
+            StandardErrorLogger = Console.Write
         });
         var testDataPath = Path.GetFullPath("TestDatabase");
         runner.Import(SystemDbContext.SystemDbName, "projects", Path.Combine(testDataPath, "projects.json"));

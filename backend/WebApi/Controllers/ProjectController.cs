@@ -1,4 +1,4 @@
-﻿using LanguageForge.WebApi.Auth;
+using LanguageForge.WebApi.Auth;
 using LanguageForge.WebApi.Dtos;
 using LanguageForge.WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
