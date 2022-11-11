@@ -1,4 +1,5 @@
-﻿using LanguageForge.WebApi.Dtos;
+﻿using LanguageForge.WebApi.Auth;
+using LanguageForge.WebApi.Dtos;
 using LanguageForge.WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,17 +10,27 @@ namespace LanguageForge.WebApi.Controllers;
 public class ProjectController : ControllerBase
 {
     private readonly ProjectService _projectService;
+    private readonly WebUserContext _userContext;
 
-    public ProjectController(ProjectService projectService)
+    public ProjectController(ProjectService projectService, WebUserContext userContext)
     {
         _projectService = projectService;
+        _userContext = userContext;
     }
 
     // GET: api/Project
     [HttpGet]
     public async Task<List<ProjectDto>> GetProjects()
     {
-        return await _projectService.ListProjects();
+        return await _projectService.ListProjects(_userContext.Projects.Select(p => p.ProjectId));
+    }
+
+    // GET: api/Project/all
+    [HttpGet("all")]
+    [AdminRequired]
+    public async Task<List<ProjectDto>> GetAllProjects()
+    {
+        return await _projectService.ListAllProjects();
     }
 
     // GET: api/Project/5
