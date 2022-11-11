@@ -1,3 +1,4 @@
+﻿using LanguageForge.Api.Entities;
 using LanguageForge.UnitTests.Fixtures;
 using LanguageForge.WebApi.Dtos;
 using LanguageForge.WebApi.Services;
@@ -40,7 +41,7 @@ public class UserServiceTest : IClassFixture<IocFixture>
             Username = "test1",
             Name = "hello",
             Email = "test@email.com",
-            Role = "role",
+            Role = UserRole.SystemAdmin,
             Active = false
         });
         userFound.ShouldBeNull();

@@ -16,7 +16,7 @@ public class ProjectServiceTest : IClassFixture<IocFixture>
     [Fact]
     public async Task CanGetProjects()
     {
-        var projects = await _projectService.ListProjects();
+        var projects = await _projectService.ListAllProjects();
         projects.ShouldNotBeEmpty();
     }
 }

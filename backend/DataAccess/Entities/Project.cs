@@ -6,4 +6,8 @@ public class Project : EntityDocument
     public required string ProjectCode { get; init; }
     public required bool AllowSharing { get; init; }
     public required Dictionary<string, InputSystem> InputSystems { get; init; }
+    /// <summary>
+    /// dictionary of user ids as the key
+    /// </summary>
+    public required Dictionary<string, ProjectUser> Users { get; init; }
 }
