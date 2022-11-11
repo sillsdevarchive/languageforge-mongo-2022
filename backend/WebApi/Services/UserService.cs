@@ -18,6 +18,7 @@ public class UserService
             Username = user.Username,
             Name = user.Name,
             Email = user.Email,
+            DateCreated = user.DateCreated,
             Role = user.Role,
             Active = user.Active,
         });

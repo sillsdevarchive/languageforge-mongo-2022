@@ -14,6 +14,7 @@ public class User : EntityDocument
     public required string Name { get; init; }
     public required string Username { get; init; }
     public required string Email { get; init; }
+    public required DateTimeOffset DateCreated { get; init; }
 
     [BsonElement("role")]
     private readonly string _roleString;
