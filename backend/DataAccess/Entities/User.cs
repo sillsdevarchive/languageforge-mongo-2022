@@ -14,6 +14,10 @@ public class User : EntityDocument
     public required string Name { get; init; }
     public required string Username { get; init; }
     public required string Email { get; init; }
+    /// <summary>
+    /// bcrypt hashed password
+    /// </summary>
+    public required string Password { get; init; }
     public required DateTimeOffset DateCreated { get; init; }
 
     [BsonElement("role")]
