@@ -22,7 +22,7 @@ public class ProjectController : ControllerBase
     [HttpGet]
     public async Task<List<ProjectDto>> GetProjects()
     {
-        return await _projectService.ListProjects(_userContext.Projects.Select(p => p.ProjectId));
+        return await _projectService.ListProjects(_userContext.Projects.Select(p => p.ProjectCode));
     }
 
     // GET: api/Project/all

@@ -13,4 +13,4 @@ public class WebUserContext
 }
 
 
-public record UserProjectRole(string ProjectId, ProjectRole Role);
+public record UserProjectRole(string ProjectCode, ProjectRole Role);

@@ -32,10 +32,10 @@ public class ProjectService
             .ToListAsync();
     }
 
-    public async Task<List<ProjectDto>> ListProjects(IEnumerable<string> projectIds)
+    public async Task<List<ProjectDto>> ListProjects(IEnumerable<string> projectCodes)
     {
         return await _systemDbContext.Projects
-            .Find(p => projectIds.Contains(p.Id))
+            .Find(p => projectCodes.Contains(p.ProjectCode))
             .Project(_projectToDto)
             .ToListAsync();
     }

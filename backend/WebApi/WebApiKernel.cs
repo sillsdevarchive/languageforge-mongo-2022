@@ -16,7 +16,7 @@ public static class WebApiKernel
             UserId = ObjectId.GenerateNewId().ToString(),
             Projects = new[]
             {
-                new UserProjectRole("testId", ProjectRole.Manager)
+                new UserProjectRole("test_import", ProjectRole.Manager)
             },
             Role = UserRole.SystemAdmin
         });
