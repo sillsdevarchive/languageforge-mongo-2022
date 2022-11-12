@@ -1,8 +1,10 @@
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using LanguageForge.Api.Entities;
 using MongoDB.Bson;
+using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 
 namespace LanguageForge.Api.Configuration;
@@ -10,6 +12,10 @@ namespace LanguageForge.Api.Configuration;
 public class LfIdSerializerProvider : JsonConverterFactory, IBsonSerializationProvider
 {
     public static LfIdSerializerProvider Instance { get; } = new LfIdSerializerProvider();
+
+    private static readonly MethodInfo WrapHelperMethodInfo =
+        new Func<LfIdSerializer, IBsonSerializer>(LfIdSerializer.WrapInSpecificType<object>).Method
+            .GetGenericMethodDefinition();
 
     private LfIdSerializerProvider()
     {
@@ -19,7 +25,8 @@ public class LfIdSerializerProvider : JsonConverterFactory, IBsonSerializationPr
     {
         if (type.IsAssignableTo(typeof(LfId)))
         {
-            return new LfIdSerializer(type);
+            var serializer = new LfIdSerializer(type);
+            return WrapHelperMethodInfo.MakeGenericMethod(type).Invoke(null, new[] { serializer }) as IBsonSerializer;
         }
 
         return null;
@@ -53,13 +60,19 @@ public class LfIdSerializer : JsonConverter<LfId>, IBsonSerializer
     /// <exception cref="SerializationException"></exception>
     public object Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
-        var id = context.Reader.ReadObjectId();
-        if (id == ObjectId.Empty)
+        var idString = context.Reader.CurrentBsonType switch
+        {
+            BsonType.String => context.Reader.ReadString(),
+            BsonType.ObjectId => context.Reader.ReadObjectId().ToString(),
+            _ => throw new SerializationException("LfId can not be created from bson type " +
+                                                  context.Reader.CurrentBsonType)
+        };
+        if (string.IsNullOrEmpty(idString))
         {
             throw new SerializationException("LfId can not be null during bson deserialization");
         }
 
-        return LfId.FromDb(id.ToString(), args.NominalType);
+        return LfId.FromDb(idString, args.NominalType);
     }
 
     /// <summary>
@@ -79,7 +92,7 @@ public class LfIdSerializer : JsonConverter<LfId>, IBsonSerializer
     /// <summary>
     /// read json into LfId
     /// </summary>
-    public override LfId? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override LfId Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var idString = reader.GetString();
         if (idString == null)
@@ -96,5 +109,43 @@ public class LfIdSerializer : JsonConverter<LfId>, IBsonSerializer
     public override void Write(Utf8JsonWriter writer, LfId value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value.GetIdForJson());
+    }
+
+    public static IBsonSerializer<T> WrapInSpecificType<T>(LfIdSerializer serializer)
+    {
+        return new LfIdSerializerSpecificType<T>(serializer);
+    }
+
+    private class LfIdSerializerSpecificType<T> : IBsonSerializer<T>
+    {
+        private readonly LfIdSerializer _lfIdSerializer;
+
+        public LfIdSerializerSpecificType(LfIdSerializer lfIdSerializer)
+        {
+            _lfIdSerializer = lfIdSerializer;
+        }
+
+
+        object IBsonSerializer.Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+        {
+            return Deserialize(context, args);
+        }
+
+        public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, T value)
+        {
+            _lfIdSerializer.Serialize(context, args, value);
+        }
+
+        public T Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+        {
+            return (T)_lfIdSerializer.Deserialize(context, args);
+        }
+
+        public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, object value)
+        {
+            _lfIdSerializer.Serialize(context, args, value);
+        }
+
+        public Type ValueType => _lfIdSerializer.ValueType;
     }
 }

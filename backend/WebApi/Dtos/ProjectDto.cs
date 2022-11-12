@@ -15,6 +15,6 @@ public class ProjectDto
     public required ProjectUserDto[] Users { get; init; }
 }
 
-public record ProjectUserDto(string UserId, ProjectRole Role)
+public record ProjectUserDto(LfId<User> UserId, ProjectRole Role)
 {
 }

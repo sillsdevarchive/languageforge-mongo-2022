@@ -9,5 +9,5 @@ public class Project : EntityDocument<Project>
     /// <summary>
     /// dictionary of user ids as the key
     /// </summary>
-    public required Dictionary<string, ProjectUser> Users { get; init; }
+    public required Dictionary<LfId<User>, ProjectUser> Users { get; init; }
 }
