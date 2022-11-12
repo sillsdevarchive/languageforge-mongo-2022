@@ -26,11 +26,11 @@ public interface LfId
 
     public static LfId FromDb(string id, Type type)
     {
-        var args = new[] { GetPrefixFromGenericType(type) + id };
+        var prefixedId = GetPrefixFromGenericType(type) + id;
         return Activator.CreateInstance(type,
                        BindingFlags.NonPublic | BindingFlags.CreateInstance | BindingFlags.Instance,
                        null,
-                       args,
+                       new[] { prefixedId },
                        null)
                    as LfId ??
                throw new SerializationException($"unable to create LfId from type {type} with id {id}");
@@ -38,10 +38,15 @@ public interface LfId
 
     private static void EnsurePrefixed(string idString, string prefix)
     {
-        if (!idString.StartsWith(prefix))
+        if (!IsPrefixed(idString, prefix))
         {
             throw new SerializationException($"""invalid id from json, id "{idString}" is not a {prefix[..^1]} id """);
         }
+    }
+
+    public static bool IsPrefixed(string idString, string prefix)
+    {
+        return idString.StartsWith(prefix);
     }
 
     public static LfId FromJson(string idString, Type type)
@@ -135,7 +140,14 @@ public readonly struct LfId<T> : LfId, IParsable<LfId<T>>
     {
         if (s == null)
         {
-            throw new ArgumentNullException(nameof(s));
+            result = Empty;
+            return false;
+        }
+
+        if (!LfId.IsPrefixed(s, LfId.GetPrefixFromEntityType(typeof(T))))
+        {
+            result = Empty;
+            return false;
         }
 
         result = LfId.FromFrontend<T>(s);
