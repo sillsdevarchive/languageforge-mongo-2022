@@ -1,11 +1,9 @@
-using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace LanguageForge.Api.Entities;
 
-public class EntityDocument : EntityBase
+public class EntityDocument<T> : EntityBase
 {
     [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public required string Id { get; init; }
+    public required LfId<T> Id { get; init; }
 }

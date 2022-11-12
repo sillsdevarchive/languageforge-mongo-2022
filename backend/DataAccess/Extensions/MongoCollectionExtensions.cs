@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using LanguageForge.Api.Entities;
 using MongoDB.Driver;
 
 namespace LanguageForge.Api.Extensions;
@@ -23,7 +24,7 @@ public static class MongoCollectionExtensions
     }
 
     public static Task<TProjection?> Update<TDocument, TProjection>(this IMongoCollection<TDocument> collection,
-        string id,
+        LfId<TDocument> id,
         UpdateDefinition<TDocument> update,
         ProjectionDefinition<TDocument, TProjection> projection
     )

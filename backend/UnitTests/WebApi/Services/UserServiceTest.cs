@@ -37,12 +37,13 @@ public class UserServiceTest : IClassFixture<IocFixture>
     {
         var userFound = await _userService.UpdateUser(new UserDto()
         {
-            Id = ObjectId.GenerateNewId().ToString(),
+            Id = LfId.FromDb<User>(ObjectId.GenerateNewId()),
             Username = "test1",
             Name = "hello",
             Email = "test@email.com",
             Role = UserRole.SystemAdmin,
-            Active = false
+            Active = false,
+            DateCreated = DateTimeOffset.UtcNow
         });
         userFound.ShouldBeNull();
     }

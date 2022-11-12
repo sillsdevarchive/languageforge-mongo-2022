@@ -1,3 +1,4 @@
+using LanguageForge.Api.Entities;
 using LanguageForge.WebApi.Dtos;
 using LanguageForge.WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ public class UserController : ControllerBase
 
     // GET: api/User/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<UserDto>> Get(string id)
+    public async Task<ActionResult<UserDto>> Get(LfId<User> id)
     {
         var user = await _userService.FindUser(id);
 
@@ -45,7 +46,7 @@ public class UserController : ControllerBase
 
     // PUT: api/User/5
     [HttpPut("{id}")]
-    public async Task<ActionResult<UserDto>> PutAsync(string id, [FromBody] UserDto user)
+    public async Task<ActionResult<UserDto>> PutAsync(LfId<User> id, [FromBody] UserDto user)
     {
         if (id != user.Id)
         {
@@ -63,7 +64,7 @@ public class UserController : ControllerBase
 
     // DELETE: api/User/5
     [HttpDelete("{id}")]
-    public async Task<StatusCodeResult> Delete(string id)
+    public async Task<StatusCodeResult> Delete(LfId<User> id)
     {
         var deleted = await _userService.DeleteUser(id);
         return deleted ? Ok() : NotFound();

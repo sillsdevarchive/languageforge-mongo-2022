@@ -37,7 +37,7 @@ public class UserService
             .ToListAsync();
     }
 
-    public async Task<UserDto?> FindUser(string userId)
+    public async Task<UserDto?> FindUser(LfId<User> userId)
     {
         return await _systemDbContext.Users
             .Find(u => u.Id == userId)
@@ -57,7 +57,7 @@ public class UserService
         );
     }
 
-    public async Task<bool> DeleteUser(string id)
+    public async Task<bool> DeleteUser(LfId<User> id)
     {
         var result = await _systemDbContext.Users.DeleteOneAsync(u => u.Id == id);
         return result.DeletedCount > 0;
