@@ -1,3 +1,4 @@
+using LanguageForge.Api.Entities;
 using LanguageForge.WebApi.Auth;
 using LanguageForge.WebApi.Dtos;
 using LanguageForge.WebApi.Services;
@@ -27,7 +28,7 @@ public class ProjectController : ControllerBase
 
     // GET: api/Project/all
     [HttpGet("all")]
-    [AdminRequired]
+    [RoleRequired(UserRole.SystemAdmin)]
     public async Task<List<ProjectDto>> GetAllProjects()
     {
         return await _projectService.ListAllProjects();

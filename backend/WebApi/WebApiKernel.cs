@@ -8,6 +8,7 @@ public static class WebApiKernel
 {
     public static void Setup(IServiceCollection services)
     {
+        services.AddHttpClient();
         services.AddSingleton<ProjectService>();
         services.AddSingleton<UserService>();
         //todo should be built from JWT

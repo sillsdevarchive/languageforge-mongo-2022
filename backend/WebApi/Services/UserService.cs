@@ -1,6 +1,7 @@
 using LanguageForge.Api;
 using LanguageForge.Api.Entities;
 using LanguageForge.Api.Extensions;
+using LanguageForge.WebApi.Auth;
 using LanguageForge.WebApi.Dtos;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -61,5 +62,18 @@ public class UserService
     {
         var result = await _systemDbContext.Users.DeleteOneAsync(u => u.Id == id);
         return result.DeletedCount > 0;
+    }
+
+    public async Task<LfUser> GetUserByEmail(string email)
+    {
+        return await _systemDbContext.Users
+            .Find(user => user.Email == email)
+            .Project(user => new LfUser(user.Email, user.Id, user.Role))
+            .SingleOrDefaultAsync();
+    }
+
+    public async Task<bool> IsPasswordValid(string email, string password)
+    {
+        throw new NotImplementedException();
     }
 }

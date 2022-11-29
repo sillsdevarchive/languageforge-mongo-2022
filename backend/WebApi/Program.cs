@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using LanguageForge.Api;
 using LanguageForge.Api.Configuration;
 using LanguageForge.WebApi;
+using LanguageForge.WebApi.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddSwaggerGen();
 
 DataServiceKernel.Setup(builder.Services);
 WebApiKernel.Setup(builder.Services);
+builder.SetupLfAuth();
 
 var app = builder.Build();
 
@@ -36,6 +38,8 @@ app.UseSwaggerUI((settings) =>
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
