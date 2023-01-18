@@ -4,6 +4,6 @@
     "omnisharp.enableImportCompletion": true,
     "omnisharp.enableEditorConfigSupport": true,
     "editor.codeActionsOnSave": {
-        "source.fixAll": true
+        "source.fixAll": false
     }
 }
