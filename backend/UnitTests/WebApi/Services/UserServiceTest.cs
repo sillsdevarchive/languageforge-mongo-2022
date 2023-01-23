@@ -8,13 +8,13 @@ using MongoDB.Driver;
 
 namespace LanguageForge.UnitTests.WebApi.Services;
 
-public class UserServiceTest : IClassFixture<IocFixture>
+public class UserServiceTest : IClassFixture<IntegrationTestFixture>
 {
     private readonly UserService _userService;
 
-    public UserServiceTest(IocFixture iocFixture)
+    public UserServiceTest(IntegrationTestFixture iocFixture)
     {
-        _userService = iocFixture.ServiceProvider.GetRequiredService<UserService>();
+        _userService = iocFixture.Services.GetRequiredService<UserService>();
     }
 
     [Fact]

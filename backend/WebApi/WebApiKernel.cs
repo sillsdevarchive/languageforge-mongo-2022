@@ -3,7 +3,6 @@ using LanguageForge.WebApi.Services;
 
 namespace LanguageForge.WebApi;
 
-#pragma warning disable IDE0058
 public static class WebApiKernel
 {
     public static void Setup(IServiceCollection services)

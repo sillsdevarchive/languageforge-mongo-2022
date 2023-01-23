@@ -16,15 +16,19 @@ public static class DataServiceKernel
         services.AddSingleton(provider =>
         {
             var configuration = provider.GetRequiredService<IConfiguration>();
-            var mongoSettings = MongoClientSettings.FromConnectionString(
-                configuration.GetValue<string>("Mongo:ConnectionString"));
-            mongoSettings.LinqProvider = LinqProvider.V2;
-            mongoSettings.LoggingSettings = new LoggingSettings(provider.GetRequiredService<ILoggerFactory>());
-            return mongoSettings;
+            return BuildMongoClientSettings(configuration.GetValue<string>("Mongo:ConnectionString"), provider);
         });
         services.AddSingleton(provider => new MongoClient(provider.GetRequiredService<MongoClientSettings>()));
 
         services.AddSingleton<SystemDbContext>();
         services.AddSingleton<ProjectDbContext>();
+    }
+
+    public static MongoClientSettings BuildMongoClientSettings(string connectionString, IServiceProvider provider)
+    {
+        var mongoSettings = MongoClientSettings.FromConnectionString(connectionString);
+        mongoSettings.LinqProvider = LinqProvider.V2;
+        mongoSettings.LoggingSettings = new LoggingSettings(provider.GetRequiredService<ILoggerFactory>());
+        return mongoSettings;
     }
 }

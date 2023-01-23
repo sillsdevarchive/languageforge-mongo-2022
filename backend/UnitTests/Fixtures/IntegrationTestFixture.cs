@@ -1,29 +1,35 @@
 using EphemeralMongo;
 using LanguageForge.Api;
 using LanguageForge.WebApi;
+using LanguageForge.WebApi.Auth;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting.Internal;
 using MongoDB.Driver;
-using MongoDB.Driver.Linq;
 
 namespace LanguageForge.UnitTests.Fixtures;
 
-public class IocFixture : IDisposable
+public class IntegrationTestFixture : IDisposable
 {
     public IMongoRunner MongoRunner { get; }
-    public ServiceProvider ServiceProvider { get; }
+    public ServiceProvider Services { get; }
 
-    public IocFixture()
+    public IntegrationTestFixture()
     {
         var services = new ServiceCollection();
+        var configuration = new ConfigurationManager()
+            .AddJsonFile("appsettings.json")
+            .AddJsonFile("appsettings.Development.json")
+            .Build();
+        var environment = new HostingEnvironment();
+
         DataServiceKernel.Setup(services);
         WebApiKernel.Setup(services);
+        AuthSetup.SetupLfAuth(services, configuration, environment);
         MongoRunner = SetupMongoRunner();
-        var clientSettings = MongoClientSettings.FromConnectionString(MongoRunner.ConnectionString);
-        clientSettings.LinqProvider = LinqProvider.V2;
-        services.RemoveAll(typeof(MongoClientSettings));
-        services.AddSingleton(clientSettings);
-        ServiceProvider = services.BuildServiceProvider(true);
+        services.Replace(ServiceDescriptor.Singleton(provider => DataServiceKernel.BuildMongoClientSettings(MongoRunner.ConnectionString, provider)));
+        Services = services.BuildServiceProvider(true);
     }
 
     private IMongoRunner SetupMongoRunner()
@@ -42,6 +48,6 @@ public class IocFixture : IDisposable
     public void Dispose()
     {
         MongoRunner.Dispose();
-        ServiceProvider.Dispose();
+        Services.Dispose();
     }
 }
