@@ -4,8 +4,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using LanguageForge.Api.Entities;
 using MongoDB.Bson;
-using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Bson.Serialization.Options;
+using MongoDB.Bson.Serialization.Serializers;
 
 namespace LanguageForge.Api.Configuration;
 
@@ -17,21 +19,30 @@ public class LfIdSerializerProvider : JsonConverterFactory, IBsonSerializationPr
         new Func<LfIdSerializer, IBsonSerializer>(LfIdSerializer.WrapInSpecificType<object>).Method
             .GetGenericMethodDefinition();
 
+    private static readonly MethodInfo DictionarySerializerCreatorMethodInfo =
+        new Func<IBsonSerializer>(CreateDictionarySerializer<object, object>).Method
+            .GetGenericMethodDefinition();
+
     private LfIdSerializerProvider()
     {
     }
 
     public IBsonSerializer? GetSerializer(Type type)
     {
-        if (type.IsAssignableTo(typeof(LfId)))
+        if (IsLfId(type))
         {
             var serializer = new LfIdSerializer(type);
             return WrapHelperMethodInfo.MakeGenericMethod(type).Invoke(null, new[] { serializer }) as IBsonSerializer;
         }
+        else if (IsDictionaryOfLfIds(type))
+        {
+            var lfIdType = type.GenericTypeArguments[0];
+            var valueType = type.GenericTypeArguments[1];
+            return DictionarySerializerCreatorMethodInfo.MakeGenericMethod(lfIdType, valueType).Invoke(null, null) as IBsonSerializer;
+        }
 
         return null;
     }
-
 
     public override bool CanConvert(Type typeToConvert)
     {
@@ -42,13 +53,40 @@ public class LfIdSerializerProvider : JsonConverterFactory, IBsonSerializationPr
     {
         return new LfIdSerializer(typeToConvert);
     }
+
+    private static bool IsLfId(Type type)
+    {
+        return type.IsAssignableTo(typeof(LfId));
+    }
+
+    private static bool IsDictionaryOfLfIds(Type type)
+    {
+        return type.GetInterfaces().Any(i => i.IsGenericType &&
+            (i.GetGenericTypeDefinition() == typeof(IDictionary<,>)) &&
+            IsLfId(i.GetGenericArguments()[0]));
+    }
+
+    private static IBsonSerializer CreateDictionarySerializer<TKey, TValue>() where TKey : notnull
+    {
+        var lfIdSerializer = new LfIdSerializer(typeof(TKey), BsonType.String);
+        var typedLfIdSerializer = LfIdSerializer.WrapInSpecificType<TKey>(lfIdSerializer);
+        return new DictionaryInterfaceImplementerSerializer<Dictionary<TKey, TValue>>(DictionaryRepresentation.Document,
+            typedLfIdSerializer, BsonSerializer.LookupSerializer(typeof(TValue)));
+    }
 }
 
 public class LfIdSerializer : JsonConverter<LfId>, IBsonSerializer
 {
+    private readonly BsonType _representation = BsonType.ObjectId;
+
     public LfIdSerializer(Type type)
     {
         ValueType = type;
+    }
+
+    public LfIdSerializer(Type type, BsonType representation) : this(type)
+    {
+        _representation = representation;
     }
 
     /// <summary>
@@ -82,7 +120,17 @@ public class LfIdSerializer : JsonConverter<LfId>, IBsonSerializer
     {
         if (value is LfId id)
         {
-            context.Writer.WriteObjectId(ObjectId.Parse(id.GetIdForDb()));
+            switch (_representation)
+            {
+                case BsonType.String:
+                    context.Writer.WriteString(id.GetIdForDb());
+                    break;
+                case BsonType.ObjectId:
+                    context.Writer.WriteObjectId(ObjectId.Parse(id.GetIdForDb()));
+                    break;
+                default:
+                    throw new SerializationException("LfId can not be serialized to bson type " + _representation);
+            }
         }
     }
 
@@ -147,5 +195,21 @@ public class LfIdSerializer : JsonConverter<LfId>, IBsonSerializer
         }
 
         public Type ValueType => _lfIdSerializer.ValueType;
+    }
+}
+
+
+/// <summary>
+/// Ensures that our LfIdSerializerProvider is used for all LfId properties including dictionaries
+/// LfIdSerializerProvider.GetSerializer is not called for dictionary members, so we apply it here after each member has been mapped
+/// </summary>
+public class EnsureLfIdMemberSerializationConvention : ConventionBase, IMemberMapConvention
+{
+    public void Apply(BsonMemberMap memberMap)
+    {
+        if (LfIdSerializerProvider.Instance.GetSerializer(memberMap.MemberType) is IBsonSerializer lfSerializer)
+        {
+            memberMap.SetSerializer(lfSerializer);
+        }
     }
 }
