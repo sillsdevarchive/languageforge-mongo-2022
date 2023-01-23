@@ -18,7 +18,7 @@ public static class DataServiceKernel
             var configuration = provider.GetRequiredService<IConfiguration>();
             var mongoSettings = MongoClientSettings.FromConnectionString(
                 configuration.GetValue<string>("Mongo:ConnectionString"));
-            mongoSettings.LinqProvider = LinqProvider.V3;
+            mongoSettings.LinqProvider = LinqProvider.V2;
             mongoSettings.LoggingSettings = new LoggingSettings(provider.GetRequiredService<ILoggerFactory>());
             return mongoSettings;
         });

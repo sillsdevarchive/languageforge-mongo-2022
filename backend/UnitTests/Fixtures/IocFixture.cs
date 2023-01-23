@@ -4,6 +4,7 @@ using LanguageForge.WebApi;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace LanguageForge.UnitTests.Fixtures;
 
@@ -19,6 +20,7 @@ public class IocFixture : IDisposable
         WebApiKernel.Setup(services);
         MongoRunner = SetupMongoRunner();
         var clientSettings = MongoClientSettings.FromConnectionString(MongoRunner.ConnectionString);
+        clientSettings.LinqProvider = LinqProvider.V2;
         services.RemoveAll(typeof(MongoClientSettings));
         services.AddSingleton(clientSettings);
         ServiceProvider = services.BuildServiceProvider(true);
