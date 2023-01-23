@@ -11,9 +11,9 @@ namespace LanguageForge.WebApi.Controllers;
 public class ProjectController : ControllerBase
 {
     private readonly ProjectService _projectService;
-    private readonly WebUserContext _userContext;
+    private readonly ILfWebContext _userContext;
 
-    public ProjectController(ProjectService projectService, WebUserContext userContext)
+    public ProjectController(ProjectService projectService, ILfWebContext userContext)
     {
         _projectService = projectService;
         _userContext = userContext;
@@ -23,7 +23,7 @@ public class ProjectController : ControllerBase
     [HttpGet]
     public async Task<List<ProjectDto>> GetProjects()
     {
-        return await _projectService.ListProjects(_userContext.Projects.Select(p => p.ProjectCode));
+        return await _projectService.ListProjects(_userContext.User.Projects.Select(p => p.ProjectCode));
     }
 
     // GET: api/Project/all

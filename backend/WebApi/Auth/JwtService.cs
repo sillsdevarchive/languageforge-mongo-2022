@@ -1,15 +1,18 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using LanguageForge.Api.Entities;
 using LanguageForge.WebApi.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace LanguageForge.WebApi.Auth;
 
 public class JwtService
 {
     public const string RoleClaimType = "role";
+    public const string ProjectsClaimType = "projects";
     public const string EmailClaimType = JwtRegisteredClaimNames.Email;
     private readonly IOptions<JwtOptions> _userOptions;
     private readonly UserService _userService;
@@ -39,10 +42,10 @@ public class JwtService
         {
             MapInboundClaims = false
         };
-        var principal = tokenHandler.ValidateToken(refreshToken, validationParameters, out var token);
+        var principal = tokenHandler.ValidateToken(refreshToken, validationParameters, out _);
         var email = principal.FindFirstValue(EmailClaimType);
         ArgumentException.ThrowIfNullOrEmpty(email);
-        var user = await _userService.GetUserByEmail(email);
+        var user = await _userService.FindLfUser(email);
         ArgumentNullException.ThrowIfNull(user);
         return GenerateJwt(user);
     }
@@ -77,8 +80,8 @@ public class JwtService
         {
             new Claim(EmailClaimType, user.Email),
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            //todo add project specific roles
             new Claim(RoleClaimType, user.Role.ToString()),
+            new Claim(ProjectsClaimType, JsonConvert.SerializeObject(user.Projects)),
         };
     }
 
@@ -98,7 +101,29 @@ public class JwtService
 
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidateLifetime = true
+            ValidateLifetime = true,
+        };
+    }
+
+    public static ILfWebContext BuildUserContext(ClaimsPrincipal user)
+    {
+        var emailClaim = user.FindFirstValue(EmailClaimType);
+        var idClaim = user.FindFirstValue(JwtRegisteredClaimNames.Sub);
+        var roleClaim = user.FindFirstValue(RoleClaimType);
+        var projectRolesClaim = user.FindFirstValue(ProjectsClaimType);
+
+        if (string.IsNullOrEmpty(emailClaim) || string.IsNullOrEmpty(idClaim) ||
+            string.IsNullOrEmpty(roleClaim) || string.IsNullOrEmpty(projectRolesClaim))
+        {
+            throw new ArgumentException($"User is missing required claims. Claims: {user.Claims}.");
+        }
+
+        var userId = LfId<User>.Parse(idClaim);
+        var userRole = Enum.Parse<UserRole>(roleClaim);
+        var projectRoles = JsonConvert.DeserializeObject<List<UserProjectRole>>(projectRolesClaim) ?? new List<UserProjectRole>();
+        return new LfWebContext
+        {
+            User = new LfUser(emailClaim, userId, userRole, projectRoles),
         };
     }
 }

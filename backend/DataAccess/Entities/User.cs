@@ -30,6 +30,8 @@ public class User : EntityDocument<User>
         init => _roleString = UserRoleToString(value);
     }
 
+    public required List<LfId<Project>> Projects { get; init; }
+
     private UserRole UserRoleFromString(string role)
     {
         return role switch

@@ -1,6 +1,5 @@
-using LanguageForge.Api.Entities;
+using LanguageForge.WebApi.Auth;
 using LanguageForge.WebApi.Services;
-using MongoDB.Bson;
 
 namespace LanguageForge.WebApi;
 
@@ -12,15 +11,15 @@ public static class WebApiKernel
         services.AddHttpClient();
         services.AddSingleton<ProjectService>();
         services.AddSingleton<UserService>();
-        //todo should be built from JWT
-        services.AddSingleton(new WebUserContext
+        services.AddHttpContextAccessor();
+        services.AddScoped((serviceProvider) =>
         {
-            UserId = ObjectId.GenerateNewId().ToString(),
-            Projects = new[]
+            var httpContext = serviceProvider.GetRequiredService<IHttpContextAccessor>().HttpContext;
+            if (httpContext?.User == null)
             {
-                new UserProjectRole("test_import", ProjectRole.Manager)
-            },
-            Role = UserRole.SystemAdmin
+                throw new InvalidOperationException($"{nameof(ILfWebContext)} should only be accessed in contexts where the user is authenticated.");
+            }
+            return JwtService.BuildUserContext(httpContext.User);
         });
     }
 }

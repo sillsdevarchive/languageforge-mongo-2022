@@ -35,7 +35,7 @@ public class IocFixture : IDisposable
         var testDataPath = Path.GetFullPath("TestDatabase");
         runner.Import(SystemDbContext.SystemDbName, "projects", Path.Combine(testDataPath, "projects.json"));
         runner.Import(SystemDbContext.SystemDbName, "users", Path.Combine(testDataPath, "users.json"));
-        runner.Import(SystemDbContext.SystemDbName, @"userrelation", Path.Combine(testDataPath, @"userrelation.json"));
+        runner.Import(SystemDbContext.SystemDbName, "userrelation", Path.Combine(testDataPath, "userrelation.json"));
         return runner;
     }
 

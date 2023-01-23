@@ -4,6 +4,7 @@ using LanguageForge.WebApi.Dtos;
 using LanguageForge.WebApi.Services;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace LanguageForge.UnitTests.WebApi.Services;
 
@@ -20,8 +21,7 @@ public class UserServiceTest : IClassFixture<IocFixture>
     public async Task CanDeleteUser()
     {
         // GIVEN an existing user
-        var users = await _userService.ListUsers();
-        var user = users.First();
+        var user = await FirstUser();
 
         // WHEN the user is deleted
         var deleted = await _userService.DeleteUser(user.Id);
@@ -52,8 +52,7 @@ public class UserServiceTest : IClassFixture<IocFixture>
     public async Task UpdateUserWorks()
     {
         // GIVEN an existing user
-        var users = await _userService.ListUsers();
-        var user = users.First();
+        var user = await FirstUser();
 
         // WHEN the user is updated
         var newName = "UpdateUserWorks";
@@ -64,5 +63,19 @@ public class UserServiceTest : IClassFixture<IocFixture>
         updatedUser.Name.ShouldBe(newName);
         user = await _userService.FindUser(user.Id);
         user.Name.ShouldBe(newName);
+    }
+
+    [Fact]
+    public async Task FindLfUserWorks()
+    {
+        var user = await FirstUser();
+        var lfUser = await _userService.FindLfUser(user.Email);
+        lfUser.ShouldNotBeNull();
+    }
+
+    private async Task<UserDto> FirstUser()
+    {
+        var users = await _userService.ListUsers();
+        return users.First();
     }
 }

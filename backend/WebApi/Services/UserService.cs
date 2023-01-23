@@ -64,12 +64,23 @@ public class UserService
         return result.DeletedCount > 0;
     }
 
-    public async Task<LfUser> GetUserByEmail(string email)
+    public async Task<LfUser?> FindLfUser(string email)
     {
-        return await _systemDbContext.Users
+        var user = await _systemDbContext.Users
             .Find(user => user.Email == email)
-            .Project(user => new LfUser(user.Email, user.Id, user.Role))
             .SingleOrDefaultAsync();
+
+        if (user == null)
+        {
+            return null;
+        }
+
+        var projectRoles = await _systemDbContext.Projects
+            .Find(proj => user.Projects.Contains(proj.Id) && proj.Users.ContainsKey(user.Id))
+            .Project(proj => new UserProjectRole(proj.ProjectCode, proj.Users.GetValueOrDefault(user.Id)!.Role))
+            .ToListAsync();
+
+        return new LfUser(user.Email, user.Id, user.Role, projectRoles);
     }
 
     public async Task<bool> IsPasswordValid(string email, string password)
