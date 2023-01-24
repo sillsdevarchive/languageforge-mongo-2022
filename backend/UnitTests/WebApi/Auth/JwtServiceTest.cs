@@ -33,10 +33,10 @@ public class JwtServiceTest : IClassFixture<IntegrationTestFixture>
         // And then converting it back to a WebUserContext
         var jwtSecurityToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
         var identity = new ClaimsPrincipal(new ClaimsIdentity(jwtSecurityToken.Claims));
-        var userContext = JwtService.BuildUserContext(identity);
-        var newUser = userContext.User;
+        var newUser = JwtService.ExtractLfUser(identity);
 
         // THEN the user is accurately preserved
+        newUser.Email.ShouldBe(user.Email);
         newUser.Id.ShouldBe(user.Id);
         newUser.Role.ShouldBe(user.Role);
 

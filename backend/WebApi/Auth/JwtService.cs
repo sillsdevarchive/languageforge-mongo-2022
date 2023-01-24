@@ -1,11 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using LanguageForge.Api.Entities;
 using LanguageForge.WebApi.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 
 namespace LanguageForge.WebApi.Auth;
 
@@ -81,7 +81,7 @@ public class JwtService
             new Claim(EmailClaimType, user.Email),
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(RoleClaimType, user.Role.ToString()),
-            new Claim(ProjectsClaimType, JsonConvert.SerializeObject(user.Projects)),
+            new Claim(ProjectsClaimType, JsonSerializer.Serialize(user.Projects)),
         };
     }
 
@@ -105,7 +105,7 @@ public class JwtService
         };
     }
 
-    public static ILfWebContext BuildUserContext(ClaimsPrincipal user)
+    public static LfUser ExtractLfUser(ClaimsPrincipal user)
     {
         var emailClaim = user.FindFirstValue(EmailClaimType);
         var idClaim = user.FindFirstValue(JwtRegisteredClaimNames.Sub);
@@ -120,10 +120,7 @@ public class JwtService
 
         var userId = LfId<User>.Parse(idClaim);
         var userRole = Enum.Parse<UserRole>(roleClaim);
-        var projectRoles = JsonConvert.DeserializeObject<List<UserProjectRole>>(projectRolesClaim) ?? new List<UserProjectRole>();
-        return new LfWebContext
-        {
-            User = new LfUser(emailClaim, userId, userRole, projectRoles),
-        };
+        var projectRoles = JsonSerializer.Deserialize<List<UserProjectRole>>(projectRolesClaim) ?? new List<UserProjectRole>();
+        return new LfUser(emailClaim, userId, userRole, projectRoles);
     }
 }

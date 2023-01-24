@@ -5,7 +5,6 @@ using System.Text.Json.Serialization;
 using LanguageForge.Api.Entities;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Options;
 using MongoDB.Bson.Serialization.Serializers;
 
@@ -195,21 +194,5 @@ public class LfIdSerializer : JsonConverter<LfId>, IBsonSerializer
         }
 
         public Type ValueType => _lfIdSerializer.ValueType;
-    }
-}
-
-
-/// <summary>
-/// Ensures that our LfIdSerializerProvider is used for all LfId properties including dictionaries
-/// LfIdSerializerProvider.GetSerializer is not called for dictionary members, so we apply it here after each member has been mapped
-/// </summary>
-public class EnsureLfIdMemberSerializationConvention : ConventionBase, IMemberMapConvention
-{
-    public void Apply(BsonMemberMap memberMap)
-    {
-        if (LfIdSerializerProvider.Instance.GetSerializer(memberMap.MemberType) is IBsonSerializer lfSerializer)
-        {
-            memberMap.SetSerializer(lfSerializer);
-        }
     }
 }

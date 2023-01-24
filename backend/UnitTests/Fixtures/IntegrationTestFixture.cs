@@ -23,11 +23,12 @@ public class IntegrationTestFixture : IDisposable
             .AddJsonFile("appsettings.Development.json")
             .Build();
         var environment = new HostingEnvironment();
-
+        services.AddSingleton<IConfiguration>(configuration);
         DataServiceKernel.Setup(services);
         WebApiKernel.Setup(services);
         AuthSetup.SetupLfAuth(services, configuration, environment);
         MongoRunner = SetupMongoRunner();
+        services.RemoveAll(typeof(MongoClientSettings));
         services.Replace(ServiceDescriptor.Singleton(provider => DataServiceKernel.BuildMongoClientSettings(MongoRunner.ConnectionString, provider)));
         Services = services.BuildServiceProvider(true);
     }
