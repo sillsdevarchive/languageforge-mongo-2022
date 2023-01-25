@@ -36,10 +36,16 @@ public class LoginController : ControllerBase
             return Unauthorized();
         }
 
-        var user = await _userService.GetUserByEmail(email);
+        var user = await _userService.FindLfUser(email);
+        if (user == null)
+        {
+            return Unauthorized();
+        }
         return new AuthenticatedResponse
         {
-            User = user, Jwt = _jwtService.GenerateJwt(user), RefreshToken = _jwtService.GenerateRefreshToken(user)
+            User = user,
+            Jwt = _jwtService.GenerateJwt(user),
+            RefreshToken = _jwtService.GenerateRefreshToken(user)
         };
     }
 
@@ -50,10 +56,16 @@ public class LoginController : ControllerBase
         var claimsPrincipal = await _googleTokenValidator.ValidateGoogleJwt(googleJwt);
         var email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
         ArgumentNullException.ThrowIfNull(email);
-        var user = await _userService.GetUserByEmail(email);
+        var user = await _userService.FindLfUser(email);
+        if (user == null)
+        {
+            return Unauthorized();
+        }
         return new AuthenticatedResponse
         {
-            User = user, Jwt = _jwtService.GenerateJwt(user), RefreshToken = _jwtService.GenerateRefreshToken(user)
+            User = user,
+            Jwt = _jwtService.GenerateJwt(user),
+            RefreshToken = _jwtService.GenerateRefreshToken(user)
         };
     }
 

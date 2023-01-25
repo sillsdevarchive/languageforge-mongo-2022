@@ -4,13 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LanguageForge.UnitTests.WebApi.Services;
 
-public class ProjectServiceTest : IClassFixture<IocFixture>
+public class ProjectServiceTest : IClassFixture<IntegrationTestFixture>
 {
     private readonly ProjectService _projectService;
 
-    public ProjectServiceTest(IocFixture iocFixture)
+    public ProjectServiceTest(IntegrationTestFixture iocFixture)
     {
-        _projectService = iocFixture.ServiceProvider.GetRequiredService<ProjectService>();
+        _projectService = iocFixture.Services.GetRequiredService<ProjectService>();
     }
 
     [Fact]

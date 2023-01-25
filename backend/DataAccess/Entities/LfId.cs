@@ -131,7 +131,7 @@ public readonly struct LfId<T> : LfId, IParsable<LfId<T>>
         return !left.Equals(right);
     }
 
-    public static LfId<T> Parse(string s, IFormatProvider? provider)
+    public static LfId<T> Parse(string s, IFormatProvider? provider = null)
     {
         return LfId.FromFrontend<T>(s);
     }

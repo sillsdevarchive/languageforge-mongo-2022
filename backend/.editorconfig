@@ -54,10 +54,6 @@ dotnet_style_prefer_auto_properties = true:silent
 dotnet_style_prefer_conditional_expression_over_assignment = true:silent
 dotnet_style_prefer_conditional_expression_over_return = false:silent
 
-
-dotnet_diagnostic.IDE0058.severity = suggestion
-dotnet_diagnostic.CA2007.severity = none
-
 ###############################
 # Naming Conventions          #
 ###############################
@@ -135,3 +131,8 @@ csharp_preserve_single_line_blocks = true
 
 # VSTHRD200: Use "Async" suffix for async methods
 dotnet_diagnostic.VSTHRD200.severity = none
+# "Expression value is never used"
+dotnet_diagnostic.IDE0058.severity = suggestion
+
+[{DataServiceKernel,WebApiKernel,AuthSetup}.cs]
+dotnet_diagnostic.IDE0058.severity = none

@@ -4,6 +4,20 @@
     "omnisharp.enableImportCompletion": true,
     "omnisharp.enableEditorConfigSupport": true,
     "editor.codeActionsOnSave": {
-        "source.fixAll": true
+        "source.fixAll": false
+    },
+    "csharp.unitTestDebuggingOptions": {
+        // .NET lib/sdk debugging
+        // https://github.com/OmniSharp/omnisharp-vscode/wiki/Debugging-into-the-.NET-Framework-itself
+        "justMyCode": false,
+        // symbolOptions tell the debugger to try to download symbols for external libs. After you have debugged and downloaded all the symbols that you need and are available, comment this out so the debugger doesn't keep looking for symbols that aren't available.
+        /*"symbolOptions": {
+            "searchMicrosoftSymbolServer": true,
+            "searchNuGetOrgSymbolServer": true
+        },*/
+        "suppressJITOptimizations": true,
+        "env": {
+            "COMPlus_ReadyToRun": "0"
+        }
     }
 }
