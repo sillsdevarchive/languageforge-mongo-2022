@@ -30,17 +30,27 @@
             // .NET lib/sdk debugging
             // https://github.com/OmniSharp/omnisharp-vscode/wiki/Debugging-into-the-.NET-Framework-itself
             "justMyCode": false,
-            // symbolOptions tell the debugger to try to download symbols for external libs. After you have debugged and downloaded all the symbols that you need and are available, comment this out so the debugger doesn't keep looking for symbols that aren't available.
-            /*"symbolOptions": {
+            /* symbolOptions tell the debugger to try to download symbols for external libs. After you have debugged and downloaded all the symbols that you need and are available, comment this out so the debugger doesn't keep looking for symbols that aren't available.
+            "symbolOptions": {
                 "searchMicrosoftSymbolServer": true,
                 "searchNuGetOrgSymbolServer": true
-            },*/
+            }, //*/
             "suppressJITOptimizations": true,
         },
         {
             "name": ".NET Core Attach",
             "type": "coreclr",
-            "request": "attach"
-        }
+            "request": "attach",
+            "processName": "WebApi.exe",
+            // .NET lib/sdk debugging
+            // https://github.com/OmniSharp/omnisharp-vscode/wiki/Debugging-into-the-.NET-Framework-itself
+            "justMyCode": false,
+            /* symbolOptions tell the debugger to try to download symbols for external libs. After you have debugged and downloaded all the symbols that you need and are available, comment this out so the debugger doesn't keep looking for symbols that aren't available.
+            "symbolOptions": {
+                "searchMicrosoftSymbolServer": true,
+                "searchNuGetOrgSymbolServer": true
+            }, //*/
+            "suppressJITOptimizations": true,
+        },
     ]
 }

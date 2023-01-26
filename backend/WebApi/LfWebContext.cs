@@ -1,3 +1,5 @@
+using LanguageForge.Api;
+using LanguageForge.Api.Entities;
 using LanguageForge.WebApi.Auth;
 using LanguageForge.WebApi.Controllers;
 
@@ -26,11 +28,6 @@ public class LfWebContext : ILfWebContext
     }
 }
 
-public interface ILfProjectContext
-{
-    public string? ProjectCode { get; }
-}
-
 public class LfProjectContext : ILfProjectContext
 {
     public string? ProjectCode { get; }
@@ -40,5 +37,14 @@ public class LfProjectContext : ILfProjectContext
         object? projectCode = null;
         httpContextAccessor.HttpContext?.Request.RouteValues.TryGetValue(PathConstants.ProjectCode, out projectCode);
         ProjectCode = projectCode?.ToString();
+    }
+}
+
+public static class LfWebContextHelpers
+{
+    public static bool IsAuthorizedForProject(this ILfWebContext lfContext, string projectCode)
+    {
+        return lfContext.User.Role == UserRole.SystemAdmin ||
+            lfContext.User.Projects.Any(p => p.ProjectCode == projectCode);
     }
 }

@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using LanguageForge.Api.Entities;
-using LanguageForge.WebApi.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -15,12 +14,12 @@ public class JwtService
     public const string ProjectsClaimType = "projects";
     public const string EmailClaimType = JwtRegisteredClaimNames.Email;
     private readonly IOptions<JwtOptions> _userOptions;
-    private readonly UserService _userService;
+    private readonly AuthenticationService _authService;
 
-    public JwtService(IOptions<JwtOptions> userOptions, UserService userService)
+    public JwtService(IOptions<JwtOptions> userOptions, AuthenticationService authService)
     {
         _userOptions = userOptions;
-        _userService = userService;
+        _authService = authService;
     }
 
     public string GenerateJwt(LfUser user)
@@ -45,7 +44,7 @@ public class JwtService
         var principal = tokenHandler.ValidateToken(refreshToken, validationParameters, out _);
         var email = principal.FindFirstValue(EmailClaimType);
         ArgumentException.ThrowIfNullOrEmpty(email);
-        var user = await _userService.FindLfUser(email);
+        var user = await _authService.Authenticate(email);
         ArgumentNullException.ThrowIfNull(user);
         return GenerateJwt(user);
     }

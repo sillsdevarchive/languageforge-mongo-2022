@@ -65,14 +65,6 @@ public class UserServiceTest : IClassFixture<IntegrationTestFixture>
         user.Name.ShouldBe(newName);
     }
 
-    [Fact]
-    public async Task FindLfUserWorks()
-    {
-        var user = await FirstUser();
-        var lfUser = await _userService.FindLfUser(user.Email);
-        lfUser.ShouldNotBeNull();
-    }
-
     private async Task<UserDto> FirstUser()
     {
         var users = await _userService.ListUsers();

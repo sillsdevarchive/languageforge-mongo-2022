@@ -1,3 +1,4 @@
+using LanguageForge.Api;
 using LanguageForge.Api.Entities;
 using Microsoft.AspNetCore.Authorization;
 

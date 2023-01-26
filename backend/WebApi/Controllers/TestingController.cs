@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using LanguageForge.Api.Entities;
 using LanguageForge.WebApi.Auth;
-using LanguageForge.WebApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -13,17 +12,17 @@ namespace LanguageForge.WebApi.Controllers;
 public class TestingController : Controller
 {
     private readonly JwtService _jwtService;
-    private readonly UserService _userService;
+    private readonly AuthenticationService _authService;
 
-    public TestingController(JwtService jwtService, UserService userService)
+    public TestingController(JwtService jwtService, AuthenticationService authService)
     {
         _jwtService = jwtService;
-        _userService = userService;
+        _authService = authService;
     }
 
     [HttpGet("make-jwt-role/{role}")]
     [AllowAnonymous]
-    public string MakeJwtForTole(UserRole role)
+    public string MakeJwtForRole(UserRole role)
     {
         return _jwtService.GenerateJwt(
             new LfUser("test@test.com",
@@ -37,7 +36,7 @@ public class TestingController : Controller
     [AllowAnonymous]
     public async Task<ActionResult<string>> MakeJwtForUser([EmailAddress] string email)
     {
-        var lfUser = await _userService.FindLfUser(email);
+        var lfUser = await _authService.Authenticate(email);
         return lfUser == null ? NotFound() : _jwtService.GenerateJwt(lfUser);
     }
 

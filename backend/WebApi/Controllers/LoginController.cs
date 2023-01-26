@@ -1,6 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using LanguageForge.WebApi.Auth;
-using LanguageForge.WebApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -12,31 +12,28 @@ namespace LanguageForge.WebApi.Controllers;
 public class LoginController : ControllerBase
 {
     private readonly GoogleTokenValidator _googleTokenValidator;
-    private readonly UserService _userService;
+    private readonly AuthenticationService _authService;
     private readonly JwtService _jwtService;
 
     public LoginController(
         GoogleTokenValidator googleTokenValidator,
-        UserService userService,
+        AuthenticationService authService,
         JwtService jwtService
     )
     {
         _googleTokenValidator = googleTokenValidator;
-        _userService = userService;
+        _authService = authService;
         _jwtService = jwtService;
     }
 
 
     [HttpPost("login-by-password")]
     [AllowAnonymous]
-    public async Task<ActionResult<AuthenticatedResponse>> LoginByPassword(string email, string password)
+    public async Task<ActionResult<AuthenticatedResponse>> LoginByPassword(
+        string emailOrUsername,
+        [DataType(DataType.Password)] string password)
     {
-        if (!await _userService.IsPasswordValid(email, password))
-        {
-            return Unauthorized();
-        }
-
-        var user = await _userService.FindLfUser(email);
+        var user = await _authService.Authenticate(emailOrUsername, password);
         if (user == null)
         {
             return Unauthorized();
@@ -56,7 +53,7 @@ public class LoginController : ControllerBase
         var claimsPrincipal = await _googleTokenValidator.ValidateGoogleJwt(googleJwt);
         var email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
         ArgumentNullException.ThrowIfNull(email);
-        var user = await _userService.FindLfUser(email);
+        var user = await _authService.Authenticate(email);
         if (user == null)
         {
             return Unauthorized();

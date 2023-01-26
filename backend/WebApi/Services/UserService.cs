@@ -63,28 +63,4 @@ public class UserService
         var result = await _systemDbContext.Users.DeleteOneAsync(u => u.Id == id);
         return result.DeletedCount > 0;
     }
-
-    public async Task<LfUser?> FindLfUser(string email)
-    {
-        var user = await _systemDbContext.Users
-            .Find(user => user.Email == email)
-            .SingleOrDefaultAsync();
-
-        if (user == null)
-        {
-            return null;
-        }
-
-        var projectRoles = await _systemDbContext.Projects
-            .Find(proj => user.Projects.Contains(proj.Id) && proj.Users.ContainsKey(user.Id))
-            .Project(proj => new UserProjectRole(proj.ProjectCode, proj.Users.GetValueOrDefault(user.Id)!.Role))
-            .ToListAsync();
-
-        return new LfUser(user.Email, user.Id, user.Role, projectRoles);
-    }
-
-    public async Task<bool> IsPasswordValid(string email, string password)
-    {
-        throw new NotImplementedException();
-    }
 }

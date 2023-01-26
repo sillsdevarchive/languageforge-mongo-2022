@@ -18,6 +18,8 @@ public static class AuthSetup
         {
             IdentityModelEventSource.ShowPII = true;
         }
+        services.AddSingleton<AuthenticationService>();
+        services.Configure<BCryptOptions>(configuration.GetSection("Authentication:BCrypt"));
         services.AddSingleton<GoogleTokenValidator>();
         services.AddSingleton<JwtService>();
         services.AddAuthorization(options =>
@@ -27,7 +29,8 @@ public static class AuthSetup
             //fallback policy is used when there's no auth attribute.
             //default policy is when there's no parameters specified on the auth attribute
             //this will make sure that all endpoints require auth unless they have the AllowAnonymous attribute
-            options.FallbackPolicy = AuthorizationPolicy.Combine(options.DefaultPolicy, options.GetPolicy(nameof(ProjectAuthorizationRequirement)));
+            options.DefaultPolicy = AuthorizationPolicy.Combine(options.DefaultPolicy, options.GetPolicy(nameof(ProjectAuthorizationRequirement)));
+            options.FallbackPolicy = options.DefaultPolicy;
         });
         services.AddScoped<IAuthorizationHandler, ProjectAuthorizationHandler>();
         services.AddOptions<JwtOptions>()

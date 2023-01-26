@@ -18,7 +18,6 @@ public class User : EntityDocument<User>
     /// bcrypt hashed password
     /// </summary>
     public required string Password { get; init; }
-    public required DateTimeOffset DateCreated { get; init; }
 
     [BsonElement("role")]
     private readonly string _roleString;
@@ -30,7 +29,7 @@ public class User : EntityDocument<User>
         init => _roleString = UserRoleToString(value);
     }
 
-    public required List<LfId<Project>> Projects { get; init; }
+    public required List<LfId<Project>>? Projects { get; init; }
 
     private UserRole UserRoleFromString(string role)
     {
