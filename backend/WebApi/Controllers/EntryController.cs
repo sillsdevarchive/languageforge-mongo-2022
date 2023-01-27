@@ -1,15 +1,15 @@
 using LanguageForge.WebApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using static LanguageForge.WebApi.Controllers.PathConstants;
 
 namespace LanguageForge.WebApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]/{projectCode}")]
+[Route($"api/[controller]/{{{ProjectCode}}}")]
 public class EntryController : ControllerBase
 {
-    // GET: api/Entry/{projectCode}
     [HttpGet]
-    public List<EntryDto> GetEntries(string projectCode)
+    public List<EntryDto> GetEntries()
     {
         return new() {
             new() {

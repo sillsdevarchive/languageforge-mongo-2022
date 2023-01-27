@@ -105,7 +105,7 @@ public class JwtService
         };
     }
 
-    public static LfUser ExtractLfUser(ClaimsPrincipal user)
+    public static LfUser? ExtractLfUser(ClaimsPrincipal user)
     {
         var emailClaim = user.FindFirstValue(EmailClaimType);
         var idClaim = user.FindFirstValue(JwtRegisteredClaimNames.Sub);
@@ -115,7 +115,7 @@ public class JwtService
         if (string.IsNullOrEmpty(emailClaim) || string.IsNullOrEmpty(idClaim) ||
             string.IsNullOrEmpty(roleClaim) || string.IsNullOrEmpty(projectRolesClaim))
         {
-            throw new ArgumentException($"User is missing required claims. Claims: {user.Claims}.");
+            return null;
         }
 
         var userId = LfId<User>.Parse(idClaim);

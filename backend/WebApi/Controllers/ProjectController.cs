@@ -3,6 +3,7 @@ using LanguageForge.WebApi.Auth;
 using LanguageForge.WebApi.Dtos;
 using LanguageForge.WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using static LanguageForge.WebApi.Controllers.PathConstants;
 
 namespace LanguageForge.WebApi.Controllers;
 
@@ -35,10 +36,10 @@ public class ProjectController : ControllerBase
     }
 
     // GET: api/Project/5
-    [HttpGet("{projectCode}")]
-    public string GetProject(string projectCode)
+    [HttpGet($"{{{ProjectCode}}}")]
+    public async Task<ProjectDto?> GetProject(string projectCode)
     {
-        return "value";
+        return await _projectService.GetProject(projectCode);
     }
 
     // POST: api/Project
@@ -48,14 +49,14 @@ public class ProjectController : ControllerBase
     }
 
     // PUT: api/Project/5
-    [HttpPut("{projectCode}")]
-    public void PutProject(string projectCode, [FromBody] string value)
+    [HttpPut($"{{{ProjectCode}}}")]
+    public void PutProject([FromBody] string value)
     {
     }
 
     // DELETE: api/Project/5
-    [HttpDelete("{projectCode}")]
-    public void DeleteProject(string projectCode)
+    [HttpDelete($"{{{ProjectCode}}}")]
+    public void DeleteProject()
     {
     }
 }

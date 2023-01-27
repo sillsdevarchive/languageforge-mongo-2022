@@ -11,5 +11,6 @@ public static class WebApiKernel
         services.AddSingleton<UserService>();
         services.AddHttpContextAccessor();
         services.AddScoped<ILfWebContext, LfWebContext>();
+        services.AddScoped<ILfProjectContext, LfProjectContext>();
     }
 }

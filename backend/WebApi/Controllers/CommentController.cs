@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using static LanguageForge.WebApi.Controllers.PathConstants;
 
 namespace LanguageForge.WebApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]/{projectCode}/{entryId}")]
+[Route($"api/[controller]/{{{ProjectCode}}}/{{entryId}}")]
 public class CommentController : ControllerBase
 {
     [HttpGet("{fieldName}/{inputSystem}")]
