@@ -2,6 +2,7 @@ using LanguageForge.Api.Entities;
 using LanguageForge.WebApi.Auth;
 using LanguageForge.WebApi.Dtos;
 using LanguageForge.WebApi.Services;
+using LanguageForge.WebApi.Validation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageForge.WebApi.Controllers;
@@ -20,7 +21,7 @@ public class ProjectController : ControllerBase
     }
 
     // GET: api/Project
-    [HttpGet]
+    [HttpGet("list")]
     public async Task<List<ProjectDto>> GetProjects()
     {
         return await _projectService.ListProjects(_userContext.User.Projects.Select(p => p.ProjectCode));
@@ -35,27 +36,36 @@ public class ProjectController : ControllerBase
     }
 
     // GET: api/Project/5
-    [HttpGet("{projectCode}")]
-    public string GetProject(string projectCode)
+    [HttpGet]
+    [RequireProjectCode]
+    public async Task<ActionResult<ProjectDto>> GetProject()
     {
-        return "value";
+        var project = await _projectService.GetProject();
+        if (project == null)
+        {
+            return NotFound();
+        }
+        return project;
     }
 
     // POST: api/Project
     [HttpPost]
+    [RequireProjectCode]
     public void PostProject([FromBody] string value)
     {
     }
 
     // PUT: api/Project/5
-    [HttpPut("{projectCode}")]
-    public void PutProject(string projectCode, [FromBody] string value)
+    [HttpPut]
+    [RequireProjectCode]
+    public void PutProject([FromBody] string value)
     {
     }
 
     // DELETE: api/Project/5
-    [HttpDelete("{projectCode}")]
-    public void DeleteProject(string projectCode)
+    [HttpDelete]
+    [RequireProjectCode]
+    public void DeleteProject()
     {
     }
 }

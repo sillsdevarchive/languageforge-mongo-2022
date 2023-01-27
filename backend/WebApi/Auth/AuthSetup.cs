@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
 
@@ -21,11 +22,15 @@ public static class AuthSetup
         services.AddSingleton<JwtService>();
         services.AddAuthorization(options =>
         {
+            options.AddPolicy(nameof(ProjectAuthorizationRequirement), policy => policy.Requirements.Add(new ProjectAuthorizationRequirement()));
+
             //fallback policy is used when there's no auth attribute.
             //default policy is when there's no parameters specified on the auth attribute
             //this will make sure that all endpoints require auth unless they have the AllowAnonymous attribute
+            options.DefaultPolicy = AuthorizationPolicy.Combine(options.DefaultPolicy, options.GetPolicy(nameof(ProjectAuthorizationRequirement)));
             options.FallbackPolicy = options.DefaultPolicy;
         });
+        services.AddScoped<IAuthorizationHandler, ProjectCodeAuthorizationHandler>();
         services.AddOptions<JwtOptions>()
             .BindConfiguration("Authentication:Jwt")
             .Validate(options => options.GoogleClientId != "==== replace ====",

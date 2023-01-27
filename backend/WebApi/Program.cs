@@ -4,13 +4,16 @@ using LanguageForge.Api.Configuration;
 using LanguageForge.Api.Entities;
 using LanguageForge.WebApi;
 using LanguageForge.WebApi.Auth;
+using LanguageForge.WebApi.Validation;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddJsonOptions(opts =>
+builder.Services.AddControllers()
+.AddMvcOptions(options => options.Filters.Add<RequireProjectCodeFilter>())
+.AddJsonOptions(opts =>
 {
     var enumConverter = new JsonStringEnumConverter();
     opts.JsonSerializerOptions.Converters.Add(enumConverter);
@@ -20,6 +23,7 @@ builder.Services.AddControllers().AddJsonOptions(opts =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    c.OperationFilter<AddRequiredProjectCodeHeader>();
     c.MapType(typeof(LfId<>), () => new OpenApiSchema { Type = "string" });
 });
 

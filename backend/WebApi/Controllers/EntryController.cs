@@ -1,15 +1,16 @@
 using LanguageForge.WebApi.Dtos;
+using LanguageForge.WebApi.Validation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageForge.WebApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]/{projectCode}")]
+[Route($"api/[controller]")]
+[RequireProjectCode]
 public class EntryController : ControllerBase
 {
-    // GET: api/Entry/{projectCode}
     [HttpGet]
-    public List<EntryDto> GetEntries(string projectCode)
+    public List<EntryDto> GetEntries()
     {
         return new() {
             new() {
