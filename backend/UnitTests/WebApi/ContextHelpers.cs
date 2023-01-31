@@ -35,10 +35,11 @@ public static class ContextHelpers
         return contextMock.Object;
     }
 
-    public static ResourceExecutingContext ResourceExecutingContext(List<IFilterMetadata> filters)
+    public static ResourceExecutingContext ResourceExecutingContext(string? projectCode)
     {
-        var FilterDescriptors = filters.Select(filter => new FilterDescriptor(filter, 0)).ToList();
-        var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor { FilterDescriptors = FilterDescriptors });
-        return new ResourceExecutingContext(actionContext, filters, new List<IValueProviderFactory>());
+        var httpContext = new DefaultHttpContext();
+        httpContext.Request.Headers.Add(Constants.ProjectCodeHeader, projectCode);
+        var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+        return new ResourceExecutingContext(actionContext, new List<IFilterMetadata>(), new List<IValueProviderFactory>());
     }
 }
