@@ -29,6 +29,7 @@ public class ProjectService
         return await _systemDbContext.Projects
             .Find(FilterDefinition<Project>.Empty)
             .Project(_projectToDto)
+            .Limit(100)
             .ToListAsync();
     }
 

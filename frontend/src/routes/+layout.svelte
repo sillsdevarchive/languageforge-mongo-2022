@@ -1,3 +1,14 @@
+<script context="module" lang="ts">
+	import { Configuration, DefaultConfig } from '$lib/gen/dotnet';
+	import { browser } from '$app/environment';
+
+	DefaultConfig.config = new Configuration({
+		basePath: browser ? location.origin : 'https://localhost:7170',
+		apiKey: name => {
+			return "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiJVc2VyOjYzZGNjYjlkMTUzNTljNmIwYTE1NDIzNiIsInJvbGUiOiJTeXN0ZW1BZG1pbiIsInByb2plY3RzIjoiW3tcIlByb2plY3RDb2RlXCI6XCJ0ZXN0LTNcIixcIlJvbGVcIjozfV0iLCJuYmYiOjE2NzU0MTQ0MjksImV4cCI6MTY3NTQxODAyOSwiaXNzIjoibXNlYWctZmluYW5jZSIsImF1ZCI6Im1zZWFnLWZpbmFuY2UifQ.Y_TSl2JZ7QPuNj38IZnhp_6TnrfzvJO5FAVtRs96PNE";
+		}
+	});
+</script>
 <script lang=ts>
 	import { page } from '$app/stores'
 	import '$lib/app.css'

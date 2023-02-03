@@ -10,6 +10,12 @@ const config = {
 			hmr: {
 				clientPort: 3000,
 			},
+			proxy: {
+				"/api": {
+					target: "https://localhost:7170",
+					secure: false,
+				},
+			},
 		},
 		preview: {
 			port: 3000,
