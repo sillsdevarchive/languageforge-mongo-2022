@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text.Json.Serialization;
 using LanguageForge.Api;
 using LanguageForge.Api.Configuration;
@@ -5,6 +6,7 @@ using LanguageForge.Api.Entities;
 using LanguageForge.WebApi;
 using LanguageForge.WebApi.Auth;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.MapType(typeof(LfId<>), () => new OpenApiSchema { Type = "string" });
+    c.CustomOperationIds(description => description.TryGetMethodInfo(out var methodInfo) ? methodInfo.Name : null);
 });
 
 DataServiceKernel.Setup(builder.Services);

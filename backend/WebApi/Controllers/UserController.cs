@@ -18,7 +18,7 @@ public class UserController : ControllerBase
 
     // GET: api/User
     [HttpGet]
-    public async Task<List<UserDto>> Get()
+    public async Task<List<UserDto>> List()
     {
         return await _userService.ListUsers();
     }
