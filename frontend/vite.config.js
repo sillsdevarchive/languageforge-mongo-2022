@@ -11,9 +11,8 @@ const config = {
 				clientPort: 3000,
 			},
 			proxy: {
-				"/api": {
-					target: "https://localhost:7170",
-					secure: false,
+				"/api": { 
+					target: process.env.VITE_LEX_BOX_API,
 				},
 			},
 		},

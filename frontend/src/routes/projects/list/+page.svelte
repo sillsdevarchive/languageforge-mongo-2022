@@ -10,6 +10,7 @@
         <div>loading...</div>
     {:then projects}
         <div class="projects">
+            <span>Projects List 2:</span>
             {#each projects as project}
                 <div>
                     {project.projectName} - User Count: {project?.users?.length ?? 0}

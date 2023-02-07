@@ -1,13 +1,27 @@
 ﻿version: "3.9"
 services:
-  web-api:
+  backend:
     build: 
       dockerfile: WebApi/Dockerfile
       context: backend
-    container_name: AspDotNetApi
+    container_name: lex-box-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - Mongo__ConnectionString=mongodb://db:27017
     ports:
       - "5170:80"
+  frontend:
+    build: 
+      dockerfile: Dockerfile
+      context: frontend
+    container_name: lf-app-dev
+    environment:
+      - API_HOST=http://app
+      - VITE_LEX_BOX_API=http://backend
+    ports:
+      - "3000:3000"
+    command: npm run dev-w-host
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules

@@ -1,11 +1,12 @@
 <script context="module" lang="ts">
 	import { Configuration, DefaultConfig } from '$lib/gen/dotnet';
-	import { browser } from '$app/environment';
 
 	DefaultConfig.config = new Configuration({
-		basePath: browser ? location.origin : 'https://localhost:7170',
+		basePath: '',
 		apiKey: name => {
-			return "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiJVc2VyOjYzZGNjYjlkMTUzNTljNmIwYTE1NDIzNiIsInJvbGUiOiJTeXN0ZW1BZG1pbiIsInByb2plY3RzIjoiW3tcIlByb2plY3RDb2RlXCI6XCJ0ZXN0LTNcIixcIlJvbGVcIjozfV0iLCJuYmYiOjE2NzU0MTQ0MjksImV4cCI6MTY3NTQxODAyOSwiaXNzIjoibXNlYWctZmluYW5jZSIsImF1ZCI6Im1zZWFnLWZpbmFuY2UifQ.Y_TSl2JZ7QPuNj38IZnhp_6TnrfzvJO5FAVtRs96PNE";
+			// TODO: this is a hack to get the API key to work without login
+			const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiJVc2VyOjYzZTFmOWE3N2QyODQzYjJiMjYzMzk1NyIsInJvbGUiOiJTeXN0ZW1BZG1pbiIsInByb2plY3RzIjoiW3tcIlByb2plY3RDb2RlXCI6XCJ0ZXN0LTNcIixcIlJvbGVcIjozfV0iLCJuYmYiOjE2NzU3NTM4OTUsImV4cCI6MTY3NTc1NzQ5NSwiaXNzIjoibXNlYWctZmluYW5jZSIsImF1ZCI6Im1zZWFnLWZpbmFuY2UifQ.uPo4ES4t0x5OEYcZmiGSmgz8ox0ffT9CO51ERaIx1oY';
+			return `Bearer ${token}`;
 		}
 	});
 </script>
