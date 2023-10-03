@@ -1,47 +1,24 @@
 using LanguageForge.WebApi.Dtos;
+using LanguageForge.WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using static LanguageForge.WebApi.Controllers.PathConstants;
 
 namespace LanguageForge.WebApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]/{projectCode}")]
+[Route($"api/[controller]/{{{ProjectCode}}}")]
 public class EntryController : ControllerBase
 {
-    // GET: api/Entry/{projectCode}
-    [HttpGet]
-    public List<EntryDto> GetEntries(string projectCode)
+    private readonly EntryService _entryService;
+
+    public EntryController(EntryService entryService)
     {
-        return new() {
-            new() {
-                Lexeme = new [] {
-                    new InputSystemValueDto("en", "Dude"),
-                    new InputSystemValueDto("de", "Kerl"),
-                },
-                CitationForm = new [] {
-                    new InputSystemValueDto("en", "Mr"),
-                    new InputSystemValueDto("de", "Herr"),
-                },
-                CVPattern = new [] {
-                    new InputSystemValueDto("de", "pattern"),
-                },
-                Sense = new [] {
-                    new SenseDto() {
-                        Gloss = new [] {
-                            new InputSystemValueDto("en", "Dude"),
-                            new InputSystemValueDto("de", "Kerl"),
-                        },
-                        Definition = new [] {
-                            new InputSystemValueDto("en", "A cool preson"),
-                            new InputSystemValueDto("de", "Eine beliebte Person"),
-                        },
-                        PartOfSpeech = PartOfSpeechDto.Noun,
-                        SemanticDomain = new [] {
-                            "2.6.3.4 Labour and birth pains",
-                            "1.1.3.5 Storm",
-                        },
-                    }
-                },
-            }
-        };
+        _entryService = entryService;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<List<EntryDto>>> GetEntries(string? filter, string? inputSystem, string? partOfSpeech, string? semanticDomain, int? skip, int? take)
+    {
+        return await _entryService.FindEntries(filter, inputSystem, partOfSpeech, semanticDomain, skip, take);
     }
 }

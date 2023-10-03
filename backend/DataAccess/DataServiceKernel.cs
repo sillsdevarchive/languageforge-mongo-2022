@@ -21,7 +21,7 @@ public static class DataServiceKernel
         services.AddSingleton(provider => new MongoClient(provider.GetRequiredService<MongoClientSettings>()));
 
         services.AddSingleton<SystemDbContext>();
-        services.AddSingleton<ProjectDbContext>();
+        services.AddScoped<ProjectDbContext>();
     }
 
     public static MongoClientSettings BuildMongoClientSettings(string connectionString, IServiceProvider provider)

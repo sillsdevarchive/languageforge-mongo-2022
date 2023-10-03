@@ -39,4 +39,12 @@ public class ProjectService
             .Project(_projectToDto)
             .ToListAsync();
     }
+
+    public async Task<ProjectDto?> GetProject(string projectCode)
+    {
+        return await _systemDbContext.Projects
+            .Find(p => p.ProjectCode == projectCode)
+            .Project(_projectToDto)
+            .SingleOrDefaultAsync();
+    }
 }
